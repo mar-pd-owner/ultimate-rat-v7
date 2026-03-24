@@ -10,15 +10,11 @@ services:
       - key: ADMIN_CHAT_ID
         value: 6454347745
       - key: NODE_VERSION
-        value: 18.20.8
-      - key: NODE_ENV
-        value: production
+        value: 20.18.0
       - key: PORT
         value: 10000
+      - key: NODE_ENV
+        value: production
     plan: free
     autoDeploy: true
     healthCheckPath: /health
-    disk:
-      name: database
-      mountPath: /database
-      sizeGB: 1
