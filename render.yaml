@@ -1,15 +1,22 @@
 services:
   - type: web
-    name: ultimate-rat-v7
-    runtime: python
-    buildCommand: pip install -r requirements.txt
-    startCommand: python bot.py
+    name: ultimate-rat-v8
+    runtime: node
+    buildCommand: npm install
+    startCommand: node src/bot.js
     envVars:
       - key: BOT_TOKEN
         sync: false
       - key: ADMIN_CHAT_ID
         value: 6454347745
-      - key: PYTHON_VERSION
-        value: 3.11.0
+      - key: NODE_VERSION
+        value: 18.0.0
+      - key: DATABASE_URL
+        value: sqlite:./database/database.sqlite
     plan: free
     autoDeploy: true
+    healthCheckPath: /health
+    disk:
+      name: database
+      mountPath: /database
+      sizeGB: 1
