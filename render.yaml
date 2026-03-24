@@ -1,6 +1,6 @@
 services:
   - type: web
-    name: ultimate-rat-v8
+    name: ultimate-rat-v9
     runtime: node
     buildCommand: npm install
     startCommand: node src/bot.js
@@ -13,8 +13,6 @@ services:
         value: 20.18.0
       - key: PORT
         value: 10000
-      - key: NODE_ENV
-        value: production
     plan: free
     autoDeploy: true
     healthCheckPath: /health
