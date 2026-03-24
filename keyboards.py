@@ -1,220 +1,187 @@
-const { Markup } = require('telegraf');
+from telegram import InlineKeyboardButton, InlineKeyboardMarkup
 
-class Keyboards {
-    static getMainKeyboard() {
-        return Markup.inlineKeyboard([
-            [Markup.button.callback('📸📹 CAMERA', 'cam_menu')],
-            [Markup.button.callback('🎙️🔊 AUDIO', 'audio_menu')],
-            [Markup.button.callback('💡✨ FLASHLIGHT', 'flash_menu')],
-            [Markup.button.callback('📳💫 VIBRATION', 'vibe_menu')],
-            [Markup.button.callback('🌐📶 NETWORK', 'network_menu')],
-            [Markup.button.callback('🔒🔓 SECURITY', 'security_menu')],
-            [Markup.button.callback('💾📁 DATA EXTRACTION', 'data_menu')],
-            [Markup.button.callback('📂🗃️ FILE MANAGER', 'file_menu')],
-            [Markup.button.callback('🖥️📱 SCREEN', 'screen_menu')],
-            [Markup.button.callback('📱⚙️ APPS', 'apps_menu')],
-            [Markup.button.callback('⚙️🔧 SYSTEM', 'system_menu')],
-            [Markup.button.callback('⌨️📝 KEYLOGGER', 'keylog_menu')],
-            [Markup.button.callback('🌐🔍 BROWSER', 'browser_menu')],
-            [Markup.button.callback('📱🌐 SOCIAL', 'social_menu')],
-            [Markup.button.callback('💰🔐 CRYPTO', 'crypto_menu')],
-            [Markup.button.callback('⚔️💀 DDOS', 'ddos_menu')],
-            [Markup.button.callback('💀⚠️ RANSOMWARE', 'ransom_menu')],
-            [Markup.button.callback('🪱🐛 SPREADER', 'spreader_menu')],
-            [Markup.button.callback('🎯💀 ZERO-CLICK', 'zero_menu')],
-            [Markup.button.callback('⚡🔧 EXTRA', 'extra_menu')],
-            [Markup.button.callback('📊 STATS', 'stats_menu')],
-            [Markup.button.callback('❓ HELP', 'help_menu')]
-        ]);
-    }
+class Keyboards:
     
-    static getCameraKeyboard() {
-        return Markup.inlineKeyboard([
-            [Markup.button.callback('📷 FRONT CAM', 'cam_front'), Markup.button.callback('📸 BACK CAM', 'cam_back'), Markup.button.callback('🔄 SWITCH', 'cam_switch')],
-            [Markup.button.callback('🎥 VIDEO 10s', 'video_10'), Markup.button.callback('🎬 VIDEO 30s', 'video_30'), Markup.button.callback('🎞️ VIDEO 60s', 'video_60')],
-            [Markup.button.callback('📸 BURST 5X', 'cam_burst'), Markup.button.callback('🌙 NIGHT', 'cam_night'), Markup.button.callback('⚡ HDR', 'cam_hdr')],
-            [Markup.button.callback('🔍 ZOOM', 'cam_zoom'), Markup.button.callback('🔄 TIMELAPSE', 'cam_timelapse'), Markup.button.callback('🔒 STEALTH', 'cam_stealth')],
-            [Markup.button.callback('🔙 BACK', 'back_main')]
-        ]);
-    }
+    @staticmethod
+    def get_main_keyboard():
+        keyboard = [
+            [InlineKeyboardButton("📸📹 CAMERA (25)", callback_data="section_camera")],
+            [InlineKeyboardButton("🎙️🔊 AUDIO (20)", callback_data="section_audio")],
+            [InlineKeyboardButton("💡✨ FLASHLIGHT (15)", callback_data="section_flash")],
+            [InlineKeyboardButton("📳💫 VIBRATION (15)", callback_data="section_vibe")],
+            [InlineKeyboardButton("🌐📶 NETWORK (30)", callback_data="section_network")],
+            [InlineKeyboardButton("🔒🔓 SECURITY (25)", callback_data="section_security")],
+            [InlineKeyboardButton("💾📁 DATA EXTRACTION (30)", callback_data="section_data")],
+            [InlineKeyboardButton("📂🗃️ FILE MANAGER (25)", callback_data="section_files")],
+            [InlineKeyboardButton("🖥️📱 SCREEN (20)", callback_data="section_screen")],
+            [InlineKeyboardButton("📱⚙️ APPS (25)", callback_data="section_apps")],
+            [InlineKeyboardButton("⚙️🔧 SYSTEM (30)", callback_data="section_system")],
+            [InlineKeyboardButton("⌨️📝 KEYLOGGER (15)", callback_data="section_keylog")],
+            [InlineKeyboardButton("🌐🔍 BROWSER (20)", callback_data="section_browser")],
+            [InlineKeyboardButton("📱🌐 SOCIAL (15)", callback_data="section_social")],
+            [InlineKeyboardButton("💰🔐 CRYPTO (12)", callback_data="section_crypto")],
+            [InlineKeyboardButton("⚔️💀 DDOS (12)", callback_data="section_ddos")],
+            [InlineKeyboardButton("💀⚠️ RANSOMWARE (12)", callback_data="section_ransom")],
+            [InlineKeyboardButton("🪱🐛 SPREADER (12)", callback_data="section_spreader")],
+            [InlineKeyboardButton("🎯💀 ZERO-CLICK (20)", callback_data="section_zero")],
+            [InlineKeyboardButton("⚡🔧 EXTRA (20)", callback_data="section_extra")],
+            [InlineKeyboardButton("📊 STATS", callback_data="stats_menu")],
+            [InlineKeyboardButton("❓ HELP", callback_data="help_menu")]
+        ]
+        return InlineKeyboardMarkup(keyboard)
     
-    static getAudioKeyboard() {
-        return Markup.inlineKeyboard([
-            [Markup.button.callback('🎤 MIC START', 'mic_start'), Markup.button.callback('🎤 MIC STOP', 'mic_stop'), Markup.button.callback('🎙️ LIVE', 'mic_live')],
-            [Markup.button.callback('🔊 SPEAKER ON', 'speaker_on'), Markup.button.callback('🔇 SPEAKER OFF', 'speaker_off'), Markup.button.callback('📢 LOUD', 'loud_mode')],
-            [Markup.button.callback('🔊 VOL MAX', 'vol_max'), Markup.button.callback('🔉 VOL 50%', 'vol_50'), Markup.button.callback('🔈 VOL 0%', 'vol_0')],
-            [Markup.button.callback('🔙 BACK', 'back_main')]
-        ]);
-    }
+    @staticmethod
+    def get_camera_keyboard():
+        keyboard = [
+            [InlineKeyboardButton("📷 FRONT CAM", callback_data="cam_front"), 
+             InlineKeyboardButton("📸 BACK CAM", callback_data="cam_back")],
+            [InlineKeyboardButton("🎥 VIDEO 10s", callback_data="video_10"), 
+             InlineKeyboardButton("🎬 VIDEO 30s", callback_data="video_30")],
+            [InlineKeyboardButton("📸 BURST 5X", callback_data="cam_burst"), 
+             InlineKeyboardButton("🌙 NIGHT", callback_data="cam_night")],
+            [InlineKeyboardButton("🔙 BACK", callback_data="back_main")]
+        ]
+        return InlineKeyboardMarkup(keyboard)
     
-    static getFlashKeyboard() {
-        return Markup.inlineKeyboard([
-            [Markup.button.callback('💡 ON', 'flash_on'), Markup.button.callback('💡 OFF', 'flash_off'), Markup.button.callback('✨ STROBE', 'flash_strobe')],
-            [Markup.button.callback('⚡ FAST', 'flash_fast'), Markup.button.callback('💥 SOS', 'flash_sos'), Markup.button.callback('🌈 RGB', 'flash_rgb')],
-            [Markup.button.callback('🔆 100%', 'bright_100'), Markup.button.callback('🔅 50%', 'bright_50'), Markup.button.callback('🔅 25%', 'bright_25')],
-            [Markup.button.callback('🔙 BACK', 'back_main')]
-        ]);
-    }
+    @staticmethod
+    def get_audio_keyboard():
+        keyboard = [
+            [InlineKeyboardButton("🎤 MIC START", callback_data="mic_start"), 
+             InlineKeyboardButton("🎤 MIC STOP", callback_data="mic_stop")],
+            [InlineKeyboardButton("🔊 SPEAKER ON", callback_data="speaker_on"), 
+             InlineKeyboardButton("🔇 SPEAKER OFF", callback_data="speaker_off")],
+            [InlineKeyboardButton("🔊 VOL MAX", callback_data="vol_max"), 
+             InlineKeyboardButton("🔉 VOL 50%", callback_data="vol_50")],
+            [InlineKeyboardButton("🔙 BACK", callback_data="back_main")]
+        ]
+        return InlineKeyboardMarkup(keyboard)
     
-    static getVibeKeyboard() {
-        return Markup.inlineKeyboard([
-            [Markup.button.callback('📳 1s', 'vibe_1'), Markup.button.callback('📳 3s', 'vibe_3'), Markup.button.callback('📳 5s', 'vibe_5')],
-            [Markup.button.callback('📳 10s', 'vibe_10'), Markup.button.callback('🎵 PATTERN', 'vibe_pattern'), Markup.button.callback('🔁 LOOP', 'vibe_loop')],
-            [Markup.button.callback('🔙 BACK', 'back_main')]
-        ]);
-    }
+    @staticmethod
+    def get_flash_keyboard():
+        keyboard = [
+            [InlineKeyboardButton("💡 FLASH ON", callback_data="flash_on"), 
+             InlineKeyboardButton("💡 FLASH OFF", callback_data="flash_off")],
+            [InlineKeyboardButton("✨ STROBE", callback_data="flash_strobe"), 
+             InlineKeyboardButton("💥 SOS", callback_data="flash_sos")],
+            [InlineKeyboardButton("🔙 BACK", callback_data="back_main")]
+        ]
+        return InlineKeyboardMarkup(keyboard)
     
-    static getNetworkKeyboard() {
-        return Markup.inlineKeyboard([
-            [Markup.button.callback('📶 WIFI ON', 'wifi_on'), Markup.button.callback('📶 WIFI OFF', 'wifi_off'), Markup.button.callback('🔍 SCAN', 'wifi_scan')],
-            [Markup.button.callback('📊 INFO', 'wifi_info'), Markup.button.callback('🔑 PASSWORD', 'wifi_password'), Markup.button.callback('🔐 CRACK', 'wifi_crack')],
-            [Markup.button.callback('📱 DATA ON', 'data_on'), Markup.button.callback('📱 DATA OFF', 'data_off'), Markup.button.callback('📊 USAGE', 'data_usage')],
-            [Markup.button.callback('✈️ AIRPLANE', 'airplane_toggle'), Markup.button.callback('🔗 BLUETOOTH', 'bt_on'), Markup.button.callback('🌐 HOTSPOT', 'hotspot_on')],
-            [Markup.button.callback('🔙 BACK', 'back_main')]
-        ]);
-    }
+    @staticmethod
+    def get_network_keyboard():
+        keyboard = [
+            [InlineKeyboardButton("📶 WIFI ON", callback_data="wifi_on"), 
+             InlineKeyboardButton("📶 WIFI OFF", callback_data="wifi_off")],
+            [InlineKeyboardButton("📱 DATA ON", callback_data="data_on"), 
+             InlineKeyboardButton("📱 DATA OFF", callback_data="data_off")],
+            [InlineKeyboardButton("✈️ AIRPLANE", callback_data="airplane_toggle"), 
+             InlineKeyboardButton("🔗 BLUETOOTH", callback_data="bt_toggle")],
+            [InlineKeyboardButton("🔙 BACK", callback_data="back_main")]
+        ]
+        return InlineKeyboardMarkup(keyboard)
     
-    static getSecurityKeyboard() {
-        return Markup.inlineKeyboard([
-            [Markup.button.callback('🔒 LOCK', 'lock'), Markup.button.callback('🔓 UNLOCK', 'unlock'), Markup.button.callback('⏭️ SLIDE', 'slide')],
-            [Markup.button.callback('🔢 BYPASS PIN', 'bypass_pin'), Markup.button.callback('🔐 BYPASS PATTERN', 'bypass_pattern'), Markup.button.callback('🔑 BYPASS PASS', 'bypass_pass')],
-            [Markup.button.callback('🔄 BYPASS FINGER', 'bypass_finger'), Markup.button.callback('👁️ BYPASS FACE', 'bypass_face'), Markup.button.callback('🔓 BYPASS ALL', 'bypass_all')],
-            [Markup.button.callback('💀 FACTORY RESET', 'factory_reset')],
-            [Markup.button.callback('🔙 BACK', 'back_main')]
-        ]);
-    }
+    @staticmethod
+    def get_security_keyboard():
+        keyboard = [
+            [InlineKeyboardButton("🔒 LOCK", callback_data="lock"), 
+             InlineKeyboardButton("🔓 UNLOCK", callback_data="unlock")],
+            [InlineKeyboardButton("🔢 BYPASS PIN", callback_data="bypass_pin"), 
+             InlineKeyboardButton("🔐 BYPASS PATTERN", callback_data="bypass_pattern")],
+            [InlineKeyboardButton("💀 FACTORY RESET", callback_data="factory_reset")],
+            [InlineKeyboardButton("🔙 BACK", callback_data="back_main")]
+        ]
+        return InlineKeyboardMarkup(keyboard)
     
-    static getDataKeyboard() {
-        return Markup.inlineKeyboard([
-            [Markup.button.callback('💬 SMS', 'get_sms'), Markup.button.callback('📞 CALLS', 'get_calls'), Markup.button.callback('👥 CONTACTS', 'get_contacts')],
-            [Markup.button.callback('🌍 LOCATION', 'get_location'), Markup.button.callback('📍 GPS TRACK', 'gps_track'), Markup.button.callback('🗺️ MAP', 'map_view')],
-            [Markup.button.callback('📸 PHOTOS', 'get_photos'), Markup.button.callback('🎥 VIDEOS', 'get_videos'), Markup.button.callback('🎵 AUDIO', 'get_audio')],
-            [Markup.button.callback('📄 DOCS', 'get_docs'), Markup.button.callback('🔑 PASSWORDS', 'get_passwords'), Markup.button.callback('🍪 BROWSER', 'get_browser')],
-            [Markup.button.callback('💬 WHATSAPP', 'get_whatsapp'), Markup.button.callback('📘 FACEBOOK', 'get_facebook'), Markup.button.callback('📷 INSTAGRAM', 'get_instagram')],
-            [Markup.button.callback('🔙 BACK', 'back_main')]
-        ]);
-    }
+    @staticmethod
+    def get_data_keyboard():
+        keyboard = [
+            [InlineKeyboardButton("💬 SMS", callback_data="get_sms"), 
+             InlineKeyboardButton("📞 CALLS", callback_data="get_calls")],
+            [InlineKeyboardButton("👥 CONTACTS", callback_data="get_contacts"), 
+             InlineKeyboardButton("🌍 LOCATION", callback_data="get_location")],
+            [InlineKeyboardButton("📸 PHOTOS", callback_data="get_photos"), 
+             InlineKeyboardButton("🎥 VIDEOS", callback_data="get_videos")],
+            [InlineKeyboardButton("🔑 PASSWORDS", callback_data="get_passwords"), 
+             InlineKeyboardButton("🍪 BROWSER", callback_data="get_browser")],
+            [InlineKeyboardButton("🔙 BACK", callback_data="back_main")]
+        ]
+        return InlineKeyboardMarkup(keyboard)
     
-    static getFileKeyboard() {
-        return Markup.inlineKeyboard([
-            [Markup.button.callback('📁 MANAGER', 'file_manager'), Markup.button.callback('📥 DOWNLOAD', 'download_file'), Markup.button.callback('📤 UPLOAD', 'upload_file')],
-            [Markup.button.callback('🗑️ DELETE', 'delete_file'), Markup.button.callback('📋 COPY', 'copy_file'), Markup.button.callback('✂️ MOVE', 'move_file')],
-            [Markup.button.callback('📝 RENAME', 'rename_file'), Markup.button.callback('🔐 ZIP', 'zip_file'), Markup.button.callback('🔓 UNZIP', 'unzip')],
-            [Markup.button.callback('🔒 ENCRYPT', 'encrypt_file'), Markup.button.callback('🔓 DECRYPT', 'decrypt_file'), Markup.button.callback('🔍 SEARCH', 'search_files')],
-            [Markup.button.callback('🔙 BACK', 'back_main')]
-        ]);
-    }
+    @staticmethod
+    def get_system_keyboard():
+        keyboard = [
+            [InlineKeyboardButton("ℹ️ INFO", callback_data="sysinfo"), 
+             InlineKeyboardButton("🔋 BATTERY", callback_data="battery")],
+            [InlineKeyboardButton("💾 RAM", callback_data="ram_info"), 
+             InlineKeyboardButton("📀 STORAGE", callback_data="storage")],
+            [InlineKeyboardButton("🔄 REBOOT", callback_data="reboot"), 
+             InlineKeyboardButton("⏻ POWER OFF", callback_data="poweroff")],
+            [InlineKeyboardButton("🔙 BACK", callback_data="back_main")]
+        ]
+        return InlineKeyboardMarkup(keyboard)
     
-    static getScreenKeyboard() {
-        return Markup.inlineKeyboard([
-            [Markup.button.callback('📸 SCREENSHOT', 'screenshot'), Markup.button.callback('🎥 SCREEN REC', 'screen_rec'), Markup.button.callback('⏹️ STOP', 'screen_rec_stop')],
-            [Markup.button.callback('🖼️ WALLPAPER', 'wallpaper'), Markup.button.callback('🔆 BRIGHT UP', 'bright_up'), Markup.button.callback('🔅 BRIGHT DOWN', 'bright_down')],
-            [Markup.button.callback('🌙 DARK MODE', 'dark_mode'), Markup.button.callback('☀️ LIGHT MODE', 'light_mode'), Markup.button.callback('📱 TOGGLE', 'screen_toggle')],
-            [Markup.button.callback('🔙 BACK', 'back_main')]
-        ]);
-    }
+    @staticmethod
+    def get_keylog_keyboard():
+        keyboard = [
+            [InlineKeyboardButton("⌨️ START", callback_data="keylog_start"), 
+             InlineKeyboardButton("⌨️ STOP", callback_data="keylog_stop")],
+            [InlineKeyboardButton("📋 GET LOGS", callback_data="keylog_get"), 
+             InlineKeyboardButton("🗑️ CLEAR", callback_data="keylog_clear")],
+            [InlineKeyboardButton("🔙 BACK", callback_data="back_main")]
+        ]
+        return InlineKeyboardMarkup(keyboard)
     
-    static getAppsKeyboard() {
-        return Markup.inlineKeyboard([
-            [Markup.button.callback('📋 INSTALLED', 'list_apps'), Markup.button.callback('🚀 OPEN APP', 'open_app'), Markup.button.callback('❌ UNINSTALL', 'uninstall_app')],
-            [Markup.button.callback('🔄 FORCE STOP', 'force_stop'), Markup.button.callback('⚡ CLEAR DATA', 'clear_app_data'), Markup.button.callback('🗑️ CLEAR CACHE', 'clear_cache')],
-            [Markup.button.callback('📦 INSTALL APK', 'install_apk'), Markup.button.callback('🔒 HIDE APP', 'hide_app'), Markup.button.callback('🔓 UNHIDE', 'unhide_app')],
-            [Markup.button.callback('📊 USAGE', 'app_usage'), Markup.button.callback('🚫 BLOCK', 'block_app'), Markup.button.callback('🔧 SYSTEM', 'system_apps')],
-            [Markup.button.callback('🔙 BACK', 'back_main')]
-        ]);
-    }
+    @staticmethod
+    def get_zero_keyboard():
+        keyboard = [
+            [InlineKeyboardButton("📱 GEN PAYLOAD", callback_data="gen_payload"), 
+             InlineKeyboardButton("📸 GEN JPG", callback_data="gen_jpg")],
+            [InlineKeyboardButton("🔗 GEN LINK", callback_data="gen_link"), 
+             InlineKeyboardButton("📤 SEND WA", callback_data="send_wa")],
+            [InlineKeyboardButton("📊 STATUS", callback_data="check_status"), 
+             InlineKeyboardButton("🎯 EXPLOIT DB", callback_data="exploit_db")],
+            [InlineKeyboardButton("🔙 BACK", callback_data="back_main")]
+        ]
+        return InlineKeyboardMarkup(keyboard)
     
-    static getSystemKeyboard() {
-        return Markup.inlineKeyboard([
-            [Markup.button.callback('ℹ️ INFO', 'sysinfo'), Markup.button.callback('🔋 BATTERY', 'battery'), Markup.button.callback('💾 RAM', 'ram_info')],
-            [Markup.button.callback('📀 STORAGE', 'storage'), Markup.button.callback('🌡️ TEMP', 'temperature'), Markup.button.callback('📊 CPU', 'cpu_info')],
-            [Markup.button.callback('🔐 ROOT', 'root_status'), Markup.button.callback('🔋 SAVE', 'battery_save'), Markup.button.callback('⚡ PERF', 'performance')],
-            [Markup.button.callback('🔄 REBOOT', 'reboot'), Markup.button.callback('⏻ POWER OFF', 'poweroff'), Markup.button.callback('💀 RESET', 'factory_reset_sys')],
-            [Markup.button.callback('🔙 BACK', 'back_main')]
-        ]);
-    }
+    @staticmethod
+    def get_extra_keyboard():
+        keyboard = [
+            [InlineKeyboardButton("🔋 BATTERY SAVE", callback_data="battery_save"), 
+             InlineKeyboardButton("⚡ PERFORMANCE", callback_data="performance")],
+            [InlineKeyboardButton("🧹 CLEAN JUNK", callback_data="clean_junk"), 
+             InlineKeyboardButton("🔍 PORT SCAN", callback_data="port_scan")],
+            [InlineKeyboardButton("🌐 IP INFO", callback_data="ip_info"), 
+             InlineKeyboardButton("📡 SENSORS", callback_data="sensors")],
+            [InlineKeyboardButton("🔙 BACK", callback_data="back_main")]
+        ]
+        return InlineKeyboardMarkup(keyboard)
     
-    static getKeylogKeyboard() {
-        return Markup.inlineKeyboard([
-            [Markup.button.callback('⌨️ START', 'keylog_start'), Markup.button.callback('⌨️ STOP', 'keylog_stop'), Markup.button.callback('📋 GET', 'keylog_get')],
-            [Markup.button.callback('📊 STATS', 'keylog_stats'), Markup.button.callback('🗑️ CLEAR', 'keylog_clear'), Markup.button.callback('📤 UPLOAD', 'keylog_upload')],
-            [Markup.button.callback('🔑 PASS', 'keylog_pass'), Markup.button.callback('💳 CARDS', 'keylog_cards'), Markup.button.callback('📧 EMAIL', 'keylog_email')],
-            [Markup.button.callback('🔙 BACK', 'back_main')]
-        ]);
-    }
-    
-    static getBrowserKeyboard() {
-        return Markup.inlineKeyboard([
-            [Markup.button.callback('📜 HISTORY', 'browser_history'), Markup.button.callback('🔖 BOOKMARKS', 'browser_bookmarks'), Markup.button.callback('🍪 COOKIES', 'browser_cookies')],
-            [Markup.button.callback('🔑 PASSWORDS', 'browser_passwords'), Markup.button.callback('💳 CARDS', 'browser_cards'), Markup.button.callback('📝 AUTOFILL', 'browser_autofill')],
-            [Markup.button.callback('🗑️ CLEAR', 'browser_clear'), Markup.button.callback('🌐 OPEN', 'browser_open'), Markup.button.callback('📥 DOWNLOADS', 'browser_downloads')],
-            [Markup.button.callback('🔙 BACK', 'back_main')]
-        ]);
-    }
-    
-    static getSocialKeyboard() {
-        return Markup.inlineKeyboard([
-            [Markup.button.callback('📘 FACEBOOK', 'fb_data'), Markup.button.callback('📷 INSTAGRAM', 'ig_data'), Markup.button.callback('💬 WHATSAPP', 'wa_data')],
-            [Markup.button.callback('🐦 TWITTER', 'twitter_data'), Markup.button.callback('📱 TELEGRAM', 'tg_data'), Markup.button.callback('🎵 TIKTOK', 'tiktok_data')],
-            [Markup.button.callback('🔑 PASS', 'social_pass'), Markup.button.callback('📜 HISTORY', 'social_history'), Markup.button.callback('🍪 COOKIES', 'social_cookies')],
-            [Markup.button.callback('🔙 BACK', 'back_main')]
-        ]);
-    }
-    
-    static getCryptoKeyboard() {
-        return Markup.inlineKeyboard([
-            [Markup.button.callback('💰 BITCOIN', 'btc_wallet'), Markup.button.callback('💎 ETHEREUM', 'eth_wallet'), Markup.button.callback('🪙 BINANCE', 'binance_data')],
-            [Markup.button.callback('📊 BALANCE', 'crypto_balance'), Markup.button.callback('🔑 PRIVATE KEYS', 'private_keys'), Markup.button.callback('📜 TX', 'crypto_tx')],
-            [Markup.button.callback('🔙 BACK', 'back_main')]
-        ]);
-    }
-    
-    static getDdosKeyboard() {
-        return Markup.inlineKeyboard([
-            [Markup.button.callback('🌐 HTTP', 'http_flood'), Markup.button.callback('📡 UDP', 'udp_flood'), Markup.button.callback('🔌 TCP', 'tcp_flood')],
-            [Markup.button.callback('📱 SMS BOMB', 'sms_bomb'), Markup.button.callback('📞 CALL BOMB', 'call_bomb'), Markup.button.callback('🔗 STOP', 'ddos_stop')],
-            [Markup.button.callback('🔙 BACK', 'back_main')]
-        ]);
-    }
-    
-    static getRansomKeyboard() {
-        return Markup.inlineKeyboard([
-            [Markup.button.callback('🔒 ENCRYPT', 'ransom_encrypt'), Markup.button.callback('🔓 DECRYPT', 'ransom_decrypt'), Markup.button.callback('💰 NOTE', 'ransom_note')],
-            [Markup.button.callback('🗑️ WIPE DATA', 'wipe_data'), Markup.button.callback('📱 WIPE SD', 'wipe_sd'), Markup.button.callback('💀 DESTROY', 'destroy_system')],
-            [Markup.button.callback('🔙 BACK', 'back_main')]
-        ]);
-    }
-    
-    static getSpreaderKeyboard() {
-        return Markup.inlineKeyboard([
-            [Markup.button.callback('📱 CONTACTS', 'spread_contacts'), Markup.button.callback('🔗 LINK', 'spread_link'), Markup.button.callback('📲 BT', 'spread_bt')],
-            [Markup.button.callback('🪱 WORM', 'worm_mode'), Markup.button.callback('📡 AUTO', 'auto_spread')],
-            [Markup.button.callback('🔙 BACK', 'back_main')]
-        ]);
-    }
-    
-    static getZeroClickKeyboard() {
-        return Markup.inlineKeyboard([
-            [Markup.button.callback('📱 GENERATE', 'gen_payload'), Markup.button.callback('📸 JPG', 'gen_jpg'), Markup.button.callback('🎵 MP3', 'gen_mp3')],
-            [Markup.button.callback('🎥 MP4', 'gen_mp4'), Markup.button.callback('📄 PDF', 'gen_pdf'), Markup.button.callback('📱 APK', 'gen_apk')],
-            [Markup.button.callback('🔗 LINK', 'gen_link'), Markup.button.callback('🔗 QR', 'gen_qr'), Markup.button.callback('📤 SEND', 'send_wa')],
-            [Markup.button.callback('📊 STATUS', 'check_status'), Markup.button.callback('🎯 EXPLOITS', 'exploit_db'), Markup.button.callback('🔍 VULN', 'vuln_scan')],
-            [Markup.button.callback('🔙 BACK', 'back_main')]
-        ]);
-    }
-    
-    static getExtraKeyboard() {
-        return Markup.inlineKeyboard([
-            [Markup.button.callback('🔋 SAVE', 'battery_save'), Markup.button.callback('⚡ PERF', 'performance'), Markup.button.callback('🧹 CLEAN', 'clean_junk')],
-            [Markup.button.callback('📡 SENSORS', 'sensors'), Markup.button.callback('🔍 PORT SCAN', 'port_scan'), Markup.button.callback('🌐 IP', 'ip_info')],
-            [Markup.button.callback('🔑 CRACK', 'password_crack'), Markup.button.callback('📡 MITM', 'mitm_attack'), Markup.button.callback('🔍 SNIFF', 'packet_sniff')],
-            [Markup.button.callback('🔙 BACK', 'back_main')]
-        ]);
-    }
-    
-    static getBackKeyboard() {
-        return Markup.inlineKeyboard([[Markup.button.callback('🔙 BACK TO MAIN', 'back_main')]]);
-    }
+    @staticmethod
+    def get_back_keyboard():
+        keyboard = [[InlineKeyboardButton("🔙 BACK TO MAIN", callback_data="back_main")]]
+        return InlineKeyboardMarkup(keyboard)
+
+# Section mapping
+SECTION_KEYBOARDS = {
+    'section_camera': Keyboards.get_camera_keyboard(),
+    'section_audio': Keyboards.get_audio_keyboard(),
+    'section_flash': Keyboards.get_flash_keyboard(),
+    'section_vibe': Keyboards.get_vibe_keyboard(),
+    'section_network': Keyboards.get_network_keyboard(),
+    'section_security': Keyboards.get_security_keyboard(),
+    'section_data': Keyboards.get_data_keyboard(),
+    'section_files': Keyboards.get_file_keyboard(),
+    'section_screen': Keyboards.get_screen_keyboard(),
+    'section_apps': Keyboards.get_apps_keyboard(),
+    'section_system': Keyboards.get_system_keyboard(),
+    'section_keylog': Keyboards.get_keylog_keyboard(),
+    'section_browser': Keyboards.get_browser_keyboard(),
+    'section_social': Keyboards.get_social_keyboard(),
+    'section_crypto': Keyboards.get_crypto_keyboard(),
+    'section_ddos': Keyboards.get_ddos_keyboard(),
+    'section_ransom': Keyboards.get_ransom_keyboard(),
+    'section_spreader': Keyboards.get_spreader_keyboard(),
+    'section_zero': Keyboards.get_zero_keyboard(),
+    'section_extra': Keyboards.get_extra_keyboard()
 }
-
-module.exports = Keyboards;
