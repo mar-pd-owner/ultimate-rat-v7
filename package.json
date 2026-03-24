@@ -27,7 +27,7 @@
     "puppeteer": "^21.6.0",
     "sharp": "^0.33.0",
     "qrcode": "^1.5.3",
-    "nodemailer": "^6.9.7",
+    "nodemailer": "^8.0.3",
     "jsonwebtoken": "^9.0.2",
     "bcrypt": "^5.1.1",
     "helmet": "^7.1.0",
