@@ -10,9 +10,11 @@ services:
       - key: ADMIN_CHAT_ID
         value: 6454347745
       - key: NODE_VERSION
-        value: 18.0.0
-      - key: DATABASE_URL
-        value: sqlite:./database/database.sqlite
+        value: 18.20.8
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 10000
     plan: free
     autoDeploy: true
     healthCheckPath: /health
